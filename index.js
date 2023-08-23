@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express() //새로운 앱 생성
-const port = 5000
+const port = 8080
 const bodyParser = require('body-parser');
+const path = require('path');
 const { User } = require("./models/User");
+static = require('serve-static');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -20,10 +22,7 @@ app.listen(port, function() {
   console.log('console.log(`Example app listening on port ${port}')
 })
 
-app.get('/', function(req, res) {
-  res.send('Hello World!')
-})
-
+app.use('/',static(path.join(__dirname,'html')));
 /*
 app.get('/', (req, res) => {
   res.send('Hello World!')
