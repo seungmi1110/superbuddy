@@ -3,20 +3,51 @@ const app = express() //새로운 앱 생성
 const port = 8080
 const bodyParser = require('body-parser');
 const path = require('path');
-const { User } = require("./models/User");
+const User = require("./models/User");
 static = require('serve-static');
+app.set("view engine", "ejs");
+
+const flash = require('express-flash');
+var passportLocalMongoose = require("passport-local-mongoose");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
+app.use(flash()); // express-flash 미들웨어를 사용합니다.
 
 //db에서  받아오기 login
 
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require("passport-local");
 const session = require('express-session');
 
 app.use(session({secret : '비밀코드', resave : true, saveUninitialized: false}));
+passport.use(new LocalStrategy({
+  usernameField: 'email' // 이 부분은 사용자가 입력하는 필드의 이름입니다.
+}, function(username, password, done) {
+  User.findOne({ email: username }, function (err, user) {
+    if (err) { return done(err); }
+    if (!user) { return done(null, false, { message: 'Incorrect username.' }); }
+    if (!user.validPassword(password)) { return done(null, false, { message: 'Incorrect password.' }); }
+    return done(null, user);
+  });
+}));
+;
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+      done(err, user);
+  });
+});
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(require("express-session")({
+    secret: "node js mongodb",
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 //여기까지---1차
@@ -31,126 +62,97 @@ mongoose.connect('mongodb+srv://superb3739:superbuddy379300@superbuddy.iev3r.mon
   console.log(err);
 });
 
-app.listen(port, function() {
-  console.log('console.log(`Example app listening on port ${port}')
-})
+
 
 //add2ed code
 
-app.use('/',static(path.join(__dirname,'html')));
+// Showing secret page
+app.get("/home", isLoggedIn, function (req, res) {
+  res.render("home", { name: req.user.username });
+});
 
-app.get('/login', function(요청, 응답){
-  응답.render('login.ejs');
-  
+// Showing register form
+app.get("/register", function (req, res) {
+  res.render('register', {
+  title: 'Registration Page',
+  name: '',
+  email: '',
+  password: ''    
+})
+});
 
-app.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+// Handling user signup
+app.post("/register", function (req, res) {
+  var email = req.body.email
+  var password = req.body.password
+  var username = req.body.username;
+  User.register(new User({username: username,email: email }),
+          password, function (err, user) {
+      if (err) {
+          console.log(err);
+          return res.render("register");
+      }
+
+      passport.authenticate("local")(
+          req, res, function () {
+          console.log('success');
+          req.flash('success', 'You have logged in')
+          res.render("home");
+      });
+  });
+});
+
+//Showing login form
+app.get("/login", function (req, res) {
+  res.render('login', {
+     title: 'Login',
+     email: '',
+     password: '',
+     messages: req.flash('error')
+ })
+});
+
+
+//Handling user login
+//Handling user login
+app.post("/login", function(req, res, next) {
+  passport.authenticate("local", function(err, user, info) {
     if (err) {
-      console.log("fail");
       return next(err);
     }
     if (!user) {
-      console.log("fail"); // 실패 시에 로그 출력
-      console.log('user detect failed')
-      return res.redirect('/fail');
-      
+      console.log('로그인 실패: ' + info.message); // 로그인 실패 시 메시지 출력
+      return res.redirect("/login"); // 실패 시 리디렉션
     }
-    console.log("success"); // 성공 시에 로그 출력
     req.logIn(user, function(err) {
       if (err) {
-        console.log("fail");
         return next(err);
       }
-      return res.redirect('/');
+      conso
+      return res.redirect("/home"); // 로그인 성공 시 리디렉션
     });
   })(req, res, next);
 });
 
 
-
-});
-
-
-
-
-passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-  User.findOne({ email: email }, (err, user) => {
-    if (err) return done(err);
-    if (!user) {
-      console.log('No user found with this email')
-      return done(null, false, { message: 'No user found with this email' });}
-
-    // 비밀번호 비교
-    user.comparePassword(password, (err, isMatch) => {
-      if (err) return done(err);
-      if (!isMatch) {
-        console.log('Incorrect password')
-        
-        return done(null, false, { message: 'Incorrect password' });}
-
-      return done(null, user);
-    });
-  });
-}));
-
-
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
-
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/', // 로그인 성공 시 리다이렉트 경로
-  failureRedirect: '/fail', // 로그인 실패 시 리다이렉트 경로
-}));
-
-app.get('/fail', (req, res) => {
-  res.send('Login failed!');
-});
-
-app.get('/', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.send('You are logged in');
-  } else {
-    res.send('You are not logged in');
-  }
-});
-
-
-
-
-
-////endcopyu
-
-
-
-
-
-app.post('/register', (req, res) => {   
-  // 클라이언트에서 전달되는 데이터에서 중복을 방지하는 로직 추가
-  const { email } = req.body;
-
-  User.findOne({ email }, (err, existingUser) => {
+//Handling user logout
+app.get("/logout", function (req, res) {
+  req.logOut(err => {
     if (err) {
-      return res.json({ success: false, err });
+      return next(err);
+    } else {
+      console.log('로그아웃됨.');
+      res.redirect('/login');
     }
-    
-    if (existingUser) {
-      return res.json({ success: false, err: "Email already exists" });
-    }
-
-    // 중복이 아니라면 새로운 유저 생성 및 저장
-    const user = new User(req.body);
-    user.save((err, userInfo) => {
-      if (err) {
-        return res.json({ success: false, err });
-      }
-      return res.status(200).json({ success: true });
-    });
   });
+});
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect("/login");
+}
+
+
+app.listen(port, function () {
+  console.log("Server Has Started!");
 });
