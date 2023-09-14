@@ -65,16 +65,15 @@ mongoose.connect('mongodb+srv://superb3739:superbuddy379300@superbuddy.iev3r.mon
 
 
 //add2ed code
-
-app.get("/mypage", isLoggedIn, function (req, res) {
-  const name = req.user.name;
-  const email = req.user.email; // 현재 로그인한 사용자의 이메일 정보를 가져옵니다.
-
-  // EJS 템플릿 렌더링
-  res.render("mypage", { email: email, name: name });
+app.get("/",  function (req, res) {
+  // 현재 로그인한 사용자 정보를 가져옵니다.
+  res.resendFile(__dirname+ '/html/intro.html'); // 사용자 정보를 뷰로 전달합니다.
 });
 
-
+// Showing secret page
+app.get("/home", isLoggedIn, function (req, res) {
+  res.render("home", { name: req.user.username });
+});
 
 // Showing register form
 app.get("/register", function (req, res) {
@@ -93,17 +92,14 @@ app.post("/register", function (req, res) {
   var username = req.body.username;
   User.register(new User({username: username,email: email }),
           password, function (err, user) {
+      
       if (err) {
           console.log(err);
+          
           return res.render("register");
       }
 
-      passport.authenticate("local")(
-          req, res, function () {
-          console.log('success');
-          req.flash('success', 'You have logged in')
-          res.render("mypage");
-      });
+      res.redirect('/login');
   });
 });
 
@@ -134,7 +130,7 @@ app.post("/login", function(req, res, next) {
         return next(err);
       }
       
-      return res.redirect("/mypage"); // 로그인 성공 시 리디렉션
+      return res.redirect("/home"); // 로그인 성공 시 리디렉션
     });
   })(req, res, next);
 });
@@ -154,6 +150,7 @@ app.get("/logout", function (req, res) {
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
+  else{ console.log('err');}
   res.redirect("/login");
 }
 
