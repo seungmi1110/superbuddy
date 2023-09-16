@@ -67,7 +67,7 @@ mongoose.connect('mongodb+srv://superb3739:superbuddy379300@superbuddy.iev3r.mon
 //add2ed code
 app.get("/",  function (req, res) {
   // 현재 로그인한 사용자 정보를 가져옵니다.
-  res.resendFile(__dirname+ '/html/intro.html'); // 사용자 정보를 뷰로 전달합니다.
+  res.sendFile(__dirname+ '/html/intro.html'); // 사용자 정보를 뷰로 전달합니다.
 });
 
 // Showing secret page
@@ -95,7 +95,7 @@ app.post("/register", function (req, res) {
       
       if (err) {
           console.log(err);
-          c
+          
           return res.render("register");
       }
 
