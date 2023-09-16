@@ -1,37 +1,289 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= title %></title>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
- 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
- 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-</head>
-<body>
-  <% if (messages.error) { %>
-  <p style="color:red"><%- messages.error %></p>
-  <% } %>
-    
-  <% if (messages.success) { %>
-      <p style="color:green"><%- messages.success %></p>
-  <% } %>
-  <form action="/login" method="post" name="form1">
- 
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email</label>
-      <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" value="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <style>
+      body {
+        margin: 0;
+        line-height: normal;
+        
+      }
+
+      :root {
+        /* fonts */
+        --font-roboto: Roboto;
+
+        /* font sizes */
+        --font-size-3xs: 10px;
+
+        /* Colors */
+        --color-orangered: #fc4c00;
+        --color-white: #fff;
+        --color-deepskyblue: #00a8fc;
+        --color-aliceblue: #e8f0fe;
+
+        /* Border radiuses */
+        --br-8xs: 5px;
+      }
+
+      .backrect-icon,
+      .intro-top-1-icon {
+        position: absolute;
+        object-fit: cover;
+      }
+
+      .intro-top-1-icon {
+        top: 0;
+        left: 0;
+        width: 1512px;
+        height: 979px;
+      }
+
+      .backrect-icon {
+        top: calc(50% - 180px);
+        left: calc(50% - 347px);
+        border-radius: var(--br-8xs);
+        width: 694px;
+        height: 360px;
+      }
+
+      .welcome-super {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 25px;
+        font-weight: 600;
+      }
+
+      .span {
+        color: var(--color-orangered);
+      }
+
+      .id-mail-container,
+      .mail-child {
+        position: absolute;
+        top: 20;
+        left: 0;
+      }
+
+      .mail-child {
+        border: 0;
+        background-color: #1e1f22;
+        top: 20px;
+        border-radius: var(--br-8xs);
+        width: 300px;
+        height: 35px;
+      }
+
+      .login-button-child,
+      .mail {
+        position: absolute;
+        top: 63px;
+        left: 0;
+        width: 300px;
+        height: 55px;
+      }
+
+      .login-button-child {
+        top: 0;
+        border-radius: var(--br-8xs);
+        background-color: #5865f2;
+        height: 39px;
+      }
+
+      .div1 {
+        position: absolute;
+        top: 10px;
+        left: 128.57px;
+        font-size: 15px;
+        font-weight: 500;
+        font-family: var(--font-roboto);
+        color: var(--color-white);
+        text-align: left;
+        display: inline-block;
+        width: 43.88px;
+        height: 18px;
+      }
+
+      .login-button {
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        background-color: transparent;
+        position: absolute;
+        top: 232px;
+        left: 0;
+        width: 300px;
+        height: 39px;
+      }
+
+      .span1 {
+        color: var(--color-aliceblue);
+      }
+
+      .span2 {
+        color: var(--color-deepskyblue);
+      }
+
+      .registerclick {
+        text-decoration: none;
+        position: absolute;
+        top: 280px;
+        left: 1px;
+        color: #8b929a;
+      }
+
+      .password-child {
+        border: 0;
+        background-color: var(--color-aliceblue);
+        position: absolute;
+        top: 21px;
+        left: 0;
+        border-radius: var(--br-8xs);
+        width: 300px;
+        height: 35px;
+      }
+
+      .color-icon {
+        position: relative;
+        width: 15px;
+        height: 10.23px;
+        object-fit: cover;
+      }
+
+      .div2,
+      .div3,
+      .password {
+        position: absolute;
+        top: 62px;
+        left: 0;
+      }
+
+      .div3,
+      .password {
+        top: 0;
+        color: var(--color-white);
+      }
+
+      .password {
+        top: 137px;
+        width: 300px;
+        height: 74px;
+        color: var(--color-deepskyblue);
+      }
+
+      .login {
+        position: absolute;
+        top: 38px;
+        left: 197px;
+        width: 302px;
+        height: 292px;
+      }
+
+      .login-screen {
+        position: absolute;
+        top: calc(50% - 179.5px);
+        left: calc(50% - 347px);
+        width: 694px;
+        height: 360px;
+      }
+
+      .div {
+        position: relative;
+        background-color: #130035;
+        width: 100%;
+        height: 979px;
+        overflow-y: auto;
+        text-align: left;
+        font-size: var(--font-size-3xs);
+        color: var(--color-white);
+        font-family: var(--font-roboto);
+      }
+
+      .form-control:focus {
+        background-color: var(--color-aliceblue) !important;
+        color: #1e1f22 !important;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap"
+    />
+  </head>
+  <body>
+    <% if (messages.error) { %>
+      <p style="color:red"><%- messages.error %></p>
+    <% } %>
+        
+    <% if (messages.success) { %>
+          <p style="color:green"><%- messages.success %></p>
+    <% } %>
+    <div class="div">
+      <img class="intro-top-1-icon" alt="" src="./public/background.png" />
+
+      <div class="login-screen">
+        <img class="backrect-icon" alt="" src="./public/loginbackground.png" />
+
+        <div class="login">
+          <div class="welcome-super">WELCOME ! SUPER BUDDY</div>
+          <form action="/login" method="post" name="form1">
+            <div class="mail">
+              <label for="exampleInputEmail1">Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                class="form-control mail-child" 
+                id="email" 
+                aria-describedby="emailHelp" 
+                placeholder="Enter email" 
+                value=""
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              >
+            </div>
+            <button class="login-button" autofocus="{true}">
+              <div class="login-button-child"></div>
+              <div class="div1">로그인</div>
+            </button>
+            <a href="/register" class="registerclick">
+              <span>계정이 필요하신가요?</span>
+              <span class="span1"> </span>
+              <span class="span2">가입하기</span>
+            </a>
+            
+            <div class="password">
+              <label for="exampleInputEmail1">비밀번호</label>
+              <input 
+                class="form-control mail-child" 
+                name="password" 
+                type="password" 
+                placeholder="Enter password" 
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              />
+              <img class="color-icon" alt="" src="./public/passwordsee.png" />
+              <div class="div2">비밀번호를 잊으셨나요?</div>
+              <div class="div3">
+                <span>비밀번호 </span>
+                <span class="span">*</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
- 
-    <div class="form-group">
-      <label for="exampleInputEmail1">Password</label>
-      <input type="password" name="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="*********" value="">
-    </div>
- 
-    <input type="submit" class="btn btn-primary" value="Add">
-    <a href="/register" class="btn btn-success ml-2">Register Here</a>
-  </form>
-</body>
+    <script>
+      
+      function changeTextColor(element, isFocused) {
+        if (isFocused) {
+          element.style.color = 'var(--color-deepskyblue)';
+        } else {
+          element.style.color = 'var(--color-white)';
+        }
+      }
+    </script>
+  </body>
 </html>
