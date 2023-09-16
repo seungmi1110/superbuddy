@@ -22,16 +22,22 @@ const session = require('express-session');
 
 app.use(session({secret : '비밀코드', resave : true, saveUninitialized: false}));
 passport.use(new LocalStrategy({
-  usernameField: 'email' // 이 부분은 사용자가 입력하는 필드의 이름입니다.
+  usernameField: 'email'
 }, function(username, password, done) {
   User.findOne({ email: username }, function (err, user) {
     if (err) { return done(err); }
     if (!user) { return done(null, false, { message: 'Incorrect username.' }); }
-    if (!user.validPassword(password)) { return done(null, false, { message: 'Incorrect password.' }); }
-    return done(null, user);
+
+    // passport-local-mongoose가 제공하는 함수를 사용하여 비밀번호를 비교합니다.
+    user.authenticate(password, function(err, authenticated, error) {
+      if (err) { return done(err); }
+      if (!authenticated) { return done(null, false, { message: 'Incorrect password.' }); }
+      return done(null, user);
+    });
   });
 }));
-;
+
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -71,8 +77,8 @@ app.get("/",  function (req, res) {
 });
 
 // Showing secret page
-app.get("/home", isLoggedIn, function (req, res) {
-  res.render("home", { name: req.user.username });
+app.get("/mypage", isLoggedIn, function (req, res) {
+  res.render('mypage', { user: req.user });
 });
 
 // Showing register form
@@ -130,7 +136,7 @@ app.post("/login", function(req, res, next) {
         return next(err);
       }
       
-      return res.redirect("/home"); // 로그인 성공 시 리디렉션
+      return res.redirect("/mypage"); // 로그인 성공 시 리디렉션
     });
   })(req, res, next);
 });

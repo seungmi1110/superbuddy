@@ -96,11 +96,22 @@
         
         
       }
-      .password-child {
+      .email-child {
         position: relative;
         border-radius: var(--br-8xs);
         background-color: var(--color-gray);
         
+      }
+      .username-child {
+        position: relative;
+        border-radius: var(--br-8xs);
+        background-color: var(--color-gray);
+        
+      }
+      .password-child {
+        position: relative;
+        border-radius: var(--br-8xs);
+        background-color: var(--color-gray);
         
       }
       .email,
@@ -175,7 +186,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
       }
-
+      .password i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        cursor: pointer; /* 아이콘에 커서 스타일 추가 */
+    }
       .div {
         position: relative;
         background-color: #130035;
@@ -257,18 +275,35 @@
             <a href="/login" class="register1">
               <span>이미 계정이 있으신가요?</span>
             </a>
-            
-            <div class="term">
-              <span>등록하는 순간 SuperBuddy의 </span>
-              <span class="span">서비스 이용 약관</span>
-              <span>와</span>
-              <span class="span"> 개인정보 보호 정책</span>
-              <span>에 동의하게 됩니다. </span>
-              <span class="span"> </span>
+            <div class="email">
+              <div class="id-mail">ID (mail)</div>
+              <input
+                type="email"
+                name="email"
+                class="email-child"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                value=""
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              />
+              <div class="error-message" id="emailError"></div>
             </div>
-            <button class="regibutton" autofocus="{true}">
-              <div class ="regibutton-child"></div>
-              <div class="div1">계속하기</div>
+            <div class="nickname">
+              <div class="id-mail">별명</div>
+              <input
+                type="username"
+                name="username"
+                class="username-child"
+                id="username"
+                aria-describedby="emailHelp"
+                placeholder="Enter username"
+                value=""
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              />
+              <div class="error-message" id="usernameError"></div>
             </div>
             <div class="password">
               <div class="id-mail">비밀번호</div>
@@ -283,16 +318,29 @@
                 onfocus="changeTextColor(this, true)"
                 onblur="changeTextColor(this, false)"
               />
-              <i class="far fa-eye" id="togglePassword" style="position: absolute; right: 10px; top: 40px; transform: translateY(-50%); color: white;"></i>
+              <i class="far fa-eye" id="togglePassword"></i>
               <div class="error-message" id="passwordError"></div>
             </div>
+            <div class="term">
+              <span>등록하는 순간 SuperBuddy의 </span>
+              <span class="span">서비스 이용 약관</span>
+              <span>와</span>
+              <span class="span"> 개인정보 보호 정책</span>
+              <span>에 동의하게 됩니다. </span>
+              <span class="span"> </span>
+            </div>
+            <button class="regibutton" autofocus="{true}">
+              <div class ="regibutton-child"></div>
+              <div class="div1">계속하기</div>
+            </div>
+            
             
             <div class="nickname">
               <div class="id-mail">별명</div>
               <input
                 type="username"
                 name="username"
-                class="password-child"
+                class="username-child"
                 id="username"
                 aria-describedby="emailHelp"
                 placeholder="Enter username"
@@ -302,21 +350,7 @@
               />
               <div class="error-message" id="usernameError"></div>
             </div>
-            <div class="email">
-              <div class="id-mail">ID (mail)</div>
-              <input
-                type="email"
-                name="email"
-                class="password-child"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-                value=""
-                onfocus="changeTextColor(this, true)"
-                onblur="changeTextColor(this, false)"
-              />
-              <div class="error-message" id="emailError"></div>
-            </div>
+            
         </form>    
       </div>
     </div>

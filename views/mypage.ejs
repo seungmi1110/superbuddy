@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        line-height: normal;
+      }
+
+      :root {
+        /* fonts */
+        --font-roboto: Roboto;
+
+        /* font sizes */
+        --font-size-2xs: 11px;
+
+        /* Colors */
+        --color-gray-100: #949494;
+        --color-white: #fff;
+        --color-darkgray: #979797;
+
+        /* Gaps */
+        --gap-31xl: 50px;
+        --gap-3xs: 10px;
+        --gap-6xs: 7px;
+      }
+
+      .div2 {
+        position: relative;
+        letter-spacing: -0.05em;
+        font-weight: 500;
+        -webkit-text-stroke: 0.5px #fff;
+      }
+
+      .child,
+      .div1,
+      .div2 {
+        align-self: stretch;
+      }
+
+      .child {
+        position: relative;
+        border-top: 1px solid var(--color-white);
+        box-sizing: border-box;
+        height: 1px;
+      }
+
+      .div1 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap-6xs);
+      }
+
+      .profileimage-icon {
+        position: relative;
+        width: 124px;
+        height: 124px;
+        z-index: 0;
+        left:20px;
+      }
+
+      .b,
+      .superbuddygmailcom {
+        position: relative;
+        letter-spacing: -0.05em;
+        line-height: 211.69%;
+      }
+
+      .superbuddygmailcom {
+        font-weight: 300;
+        display: inline-block;
+        width: 108px;
+        height: 22px;
+        flex-shrink: 0;
+      }
+
+      .parent {
+        position: absolute;
+        top: 22px;
+        left: 0;
+        height: 21px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 19px;
+      }
+
+      .hello-world {
+        position: relative;
+        letter-spacing: -0.05em;
+        line-height: 211.69%;
+        font-weight: 300;
+      }
+
+      .container,
+      .group {
+        position: absolute;
+        top: 0;
+        left: 0.5px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap-6xs);
+      }
+
+      .container {
+        top: 44px;
+        left: 0;
+        gap: var(--gap-3xs);
+      }
+
+      .detail {
+        position: absolute;
+        margin: 0 !important;
+        top: 40.5px;
+        left: 10px;
+        width: 157px;
+        height: 67px;
+        z-index: 0;
+      }
+
+      .div4 {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        position: relative;
+        z-index: 0;
+      }
+
+      .div7 {
+        letter-spacing: -0.05em;
+        font-weight: 500;
+        display: inline-block;
+        width: 130px;
+        height: 14px;
+        flex-shrink: 0;
+        text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        
+      }
+
+      .div7,
+      .div8,
+      .item {
+        position: relative;
+      }
+
+      .div8 {
+        letter-spacing: -0.05em;
+        font-weight: 500;
+        display: inline-block;
+        width: 51px;
+        height: 11px;
+        flex-shrink: 0;
+      }
+
+      .item {
+        border-top: 1px solid var(--color-gray-100);
+        box-sizing: border-box;
+        width: 53px;
+        height: 1px;
+      }
+
+      .a {
+        text-decoration: none;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 0 2px;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 1px;
+        cursor: pointer;
+        margin-left: -80px;
+        margin-bottom: -1px;
+        font-size: var(--font-size-2xs);
+        color: var(--color-gray-100);
+      }
+
+      .div6,
+      .profilecontent {
+        margin: 0 !important;
+        position: absolute;
+        z-index: 1;
+      }
+
+      .div6 {
+        bottom: 95.5px;
+        left: 177px;
+        width: 130px;
+        height: 11px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-start;
+        font-size: 15px;
+        color: var(--color-white);
+      }
+
+      .profilecontent {
+        flex: 1;
+        top: -0.5px;
+        left: 168px;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--gap-3xs);
+      }
+
+      .content,
+      .div,
+      .div3,
+      .profilecontent {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .div3 {
+        align-self: stretch;
+        height: 123px;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        gap: 44px;
+        font-size: var(--font-size-2xs);
+        color: var(--color-darkgray);
+      }
+
+      .content,
+      .div {
+        flex-direction: column;
+      }
+
+      .div {
+        align-self: stretch;
+        padding: 0 12px;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .content {
+        border-radius: 10px;
+        background-color: #1b1b1b;
+        width: 1222px;
+        height: 1084px;
+        padding: 22px 34px 49px 13px;
+        box-sizing: border-box;
+        align-items: flex-start;
+      }
+
+      .mypage,
+      .page {
+        display: flex;
+        align-items: center;
+      }
+
+      .page {
+        align-self: stretch;
+        overflow-y: auto;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .mypage {
+        position: relative;
+        background-color: #363535;
+        width: 100%;
+        overflow: hidden;
+        flex-direction: column;
+        padding: 102px 0;
+        box-sizing: border-box;
+        justify-content: flex-start;
+        text-align: left;
+        font-size: 18px;
+        color: var(--color-white);
+        font-family: var(--font-roboto);
+      }
+      .profile-info {
+        display: flex;
+        align-items: center;
+        gap: 90px;
+        }
+    
+      @media screen and (max-width: 1200px) {
+        .page {
+          flex-direction: row;
+          gap: 27px;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      @media screen and (max-width: 960px) {
+        .page {
+          flex-direction: column;
+          gap: var(--gap-31xl);
+          align-items: flex-start;
+          justify-content: center;
+        }
+      }
+
+      @media screen and (max-width: 420px) {
+        .page {
+          flex-direction: column;
+          gap: var(--gap-31xl);
+          align-items: flex-start;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mypage">
+      <div class="page">
+        <div class="content">
+          <div class="div">
+            <div class="div1">
+              <div class="div2">프로필</div>
+              <div class="child"></div>
+            </div>
+            <div class="div3">
+              <img
+                class="profileimage-icon"
+                alt=""
+                src="https://ifh.cc/g/R5RGyK.png"
+              />
+              <div class="div6">
+                <div class="profile-info">
+                    <div class="div7"><%= user.username %></div>
+                    <a class="a" id="link">
+                        <div class="div8">프로필 수정</div>
+                        <div class="item"></div>
+                    </a>
+                </div>
+                </div>
+              <div class="profilecontent">
+                <div class="div4">
+                  <div class="detail">
+                    <div class="parent">
+                      <b class="b">이메일</b>
+                      <div class="superbuddygmailcom"><%= user.email %></div>
+                    </div>
+                    <div class="group">
+                      <b class="b">한줄 소개 </b>
+                      <div class="hello-world">Hello World!</div>
+                    </div>
+                    <div class="container">
+                      <b class="b">가입날짜</b>
+                      <div class="hello-world"><%= user.registrationDate.toISOString().split('T')[0] %></div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var link = document.getElementById("link");
+      if (link) {
+        link.addEventListener("click", function (e) {
+          // Please sync "mypage_edit" to the project
+        });
+      }
+    </script>
+  </body>
+</html>
