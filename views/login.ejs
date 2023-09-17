@@ -256,7 +256,7 @@
           <div class="welcome-super">WELCOME ! SUPER BUDDY</div>
           <form action="/login" method="post" name="form1">
             <div class="mail">
-              <label for="exampleInputEmail1">Email</label>
+              <label for="exampleInputEmail1">ID (mail)</label>
               <input 
                 type="email" 
                 name="email" 
@@ -284,7 +284,10 @@
                 />
                 <i class="far fa-eye" id="togglePassword"></i>
             </div>
-              <div class="div2">비밀번호를 잊으셨나요?</div>
+              <div class="div2">
+                <a onclick=forgotMypassword();>비밀번호를 잊으셨나요?</a>
+              </div>
+              
             </div>
             <button class="login-button" autofocus="{true}">
               <div class="login-button-child"></div>
@@ -329,7 +332,9 @@
             this.classList.toggle('fa-eye-slash');
         });
 
-
+      function forgotMypassword(){
+        alert("기능 추가 중입니다 관리자에게 문의하세요!");
+      }
     </script>
   </body>
 </html>

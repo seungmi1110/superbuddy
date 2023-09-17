@@ -52,8 +52,8 @@
       .register1 {
         position: absolute;
         margin: 0 !important;
-        top: 432px;
-        left: 58px;
+        top: 415px;
+        left: 45px;
         z-index: 1;
         color: var(--color-deepskyblue);
       }
@@ -61,8 +61,8 @@
       .term {
         position: absolute;
         margin: 0 !important;
-        top: 411px;
-        left: 57px;
+        top: 400px;
+        left: 45px;
         font-size: 8px;
         z-index: 2;
         color: var(--color-lightslategray);
@@ -71,6 +71,7 @@
       .div1 {
         position: relative;
         font-weight: 500;
+        color: var(--color-white);
       }
 
       .regibutton {
@@ -78,20 +79,22 @@
         padding: 0;
         margin: 0 !important;
         position: absolute;
-        top: 360px;
+        top: 355px;
         left: 45px;
-        border: none;
+        border: 0;
         background-color: #5865f2;
         display: flex;
         flex-direction: row;
         padding: 10px 134px;
         align-items: center;
         justify-content: center;
-        
+        border-radius: var(--br-8xs);
         font-size: 15px;
       }
       .regibutton-child{
         top: 0;
+        border-radius: var(--br-8xs);
+        background-color: #5865f2;
         
         
         
@@ -147,7 +150,7 @@
       }
 
       .email {
-        top: 108px;
+        top: 110px;
         left: 57px;
         display: flex;
         flex-direction: column;
@@ -189,7 +192,7 @@
       .password i {
         position: absolute;
         right: 10px;
-        top: 50%;
+        top: 55%;
         transform: translateY(-50%);
         color: white;
         cursor: pointer; /* 아이콘에 커서 스타일 추가 */
@@ -209,7 +212,8 @@
       /* Added styles for input elements */
       input[type="username"],
       input[type="email"],
-      input[type="password"] {
+      input[type="password"],
+      input[type="text"] {
         width: 300px;
 
 
@@ -335,21 +339,6 @@
             </div>
             
             
-            <div class="nickname">
-              <div class="id-mail">별명</div>
-              <input
-                type="username"
-                name="username"
-                class="username-child"
-                id="username"
-                aria-describedby="emailHelp"
-                placeholder="Enter username"
-                value=""
-                onfocus="changeTextColor(this, true)"
-                onblur="changeTextColor(this, false)"
-              />
-              <div class="error-message" id="usernameError"></div>
-            </div>
             
         </form>    
       </div>
@@ -375,7 +364,7 @@
     }
       
       const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('.password-child');  // Change this line
+      const password = document.querySelector('.password-child');  // Change this line
       
         togglePassword.addEventListener('click', function (e) {
             // toggle the type attribute
