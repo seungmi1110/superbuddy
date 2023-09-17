@@ -3,6 +3,15 @@ const app = express() //새로운 앱 생성
 const port = 8080
 const bodyParser = require('body-parser');
 const path = require('path');
+// //https for WebRtc
+// const https = require('https');
+// const fs = require('fs');
+
+// const options = {
+//   key: fs.readFileSync('key.pem'),
+//   cert: fs.readFileSync("cert.pem")
+// };
+// const server = http.createServer(options, app);
 const User = require("./models/User");
 static = require('serve-static');
 app.set("view engine", "ejs");
@@ -78,6 +87,11 @@ mongoose.connect('mongodb+srv://superb3739:superbuddy379300@superbuddy.iev3r.mon
 
 app.get("/subscribe", isLoggedIn, function (req, res) {
   res.render('subscribe');
+});
+app.get("/chats", isLoggedIn, function (req, res) {
+  // 현재 로그인한 사용자 정보를 가져옵니다.
+  res.sendFile(__dirname+ '/src/chats.html'); // 사용자 정보를 뷰로 전달합니다.
+  // dirname+ '/src/chats.html'+ 'channelId=' + channelId
 });
 //add2ed code
 app.get("/",  function (req, res) {

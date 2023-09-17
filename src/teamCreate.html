@@ -179,11 +179,12 @@
     <!-- JavaScript 함수 정의 -->
     <script>
         // 팀 참가 컨테이너 생성 함수
-        function createTeamContainer(imageSrc, title, user, tags1, tags2, time, gameTag, capacity, x, y) {
+        function createTeamContainer(imageSrc, title, user, tags1, tags2, time, gameTag, capacity, x, y, channelId) {
             const container = document.createElement("div");
             container.className = "teamJoin-container";
             container.onclick = function() {
-                showAlert(`${title} 채널에 참가하시겠습니까?`);
+                // 각 팀에 대한 고유한 페이지로 이동(뒤에 함수로 따로 showAlert 정의)
+                showAlert(`${title} 채널에 참가하시겠습니까?`, channelId);
             };
 
             // 위치 설정
@@ -242,17 +243,17 @@
         }
 
         // 팀 컨테이너 생성 및 추가
-        const teamContainer1 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "즐겜합쉬다~~", "User1", "# Hello", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 189, 323);
-        const teamContainer2 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 413, 323);
-        const teamContainer3 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 637, 323);
-        const teamContainer4 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 861, 323);
-        const teamContainer5 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 1085, 323);
+        const teamContainer1 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "즐겜합쉬다~~", "User1", "# Hello", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 189, 323,1);
+        const teamContainer2 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 413, 323,2);
+        const teamContainer3 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 637, 323,3);
+        const teamContainer4 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 861, 323,4);
+        const teamContainer5 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 1085, 323,5);
 
-        const teamContainer6 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "즐겜합쉬다~~", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 189, 686);
-        const teamContainer7 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 413, 686);
-        const teamContainer8 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 637, 686);
-        const teamContainer9 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 861, 686);
-        const teamContainer10 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 1085, 686);
+        const teamContainer6 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "즐겜합쉬다~~", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 189, 686,6);
+        const teamContainer7 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 413, 686,7);
+        const teamContainer8 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 637, 686,8);
+        const teamContainer9 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 861, 686,9);
+        const teamContainer10 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 1085, 686,10);
 
         document.body.appendChild(teamContainer1);
         document.body.appendChild(teamContainer2);
@@ -266,23 +267,33 @@
         document.body.appendChild(teamContainer9);
         document.body.appendChild(teamContainer10);
 
-        function showAlert(message) {
+        function showAlert(message, channelId) {
             // 모달 메시지 변경
             document.getElementById("modal-message").textContent = message;
             // 모달 보이기
             document.getElementById("myModal").style.display = "block";
+
+            // Yes 버튼을 클릭한 경우 페이지 이동, No 버튼을 클릭한 경우 모달 닫기
+            const yesButton = document.querySelector(".yes-button");
+
+            yesButton.onclick = function() {
+                closeModal();
+                redirectToIndex('Yes',channelId);
+            };
+
         }
         function closeModal() {
             document.getElementById("myModal").style.display = "none";
         }
-        function redirectToIndex(button) {
+        function redirectToIndex(button, channelId) {
             if (button === 'Yes') {
-                // Yes 버튼을 클릭한 경우, index.html 페이지로 이동
-                window.location.href = 'index.html';
+                parent.location.href = '/chats';
+                // window.location.href = `chats.html?channelId=${channelId}`;
             } else {
                 // No 버튼을 클릭한 경우, 모달 닫기만 수행
                 closeModal();
             }
+
         }
 
         function searchTags() {
