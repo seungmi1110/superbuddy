@@ -17,6 +17,7 @@
             background-color: #363535;
             position: absolute;
             border-radius: 0px 0px 0px 0px;
+            
         }
         #main {
             display: flex;
@@ -151,6 +152,7 @@
 </head>
 
 <body>
+    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%" z-index: 0;></iframe>
     <div>
         <div class="search-box">
             <input type="text" id="tagSearch" placeholder="검색할 #tag를 입력하세요" onkeydown="if(event.key === 'Enter') searchTags()">
@@ -172,7 +174,7 @@
         </div>
     </div>
     <!-- 상단바를 로드할 컨테이너 -->
-    <iframe src="spbd_navbar.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+    
     
     <!-- JavaScript 함수 정의 -->
     <script>
@@ -334,6 +336,9 @@
                 teamContainer.style.display = "block";
             });
         }
+
+
+
     </script>
 </body>
 </html>

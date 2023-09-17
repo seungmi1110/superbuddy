@@ -22,7 +22,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #333; /* 배경 색상 */
+            background-color: #1B1B1B; /* 배경 색상 */
             color: #fff; /* 텍스트 색상 */
             padding: 2px 0; /* 상단바 여백 */
         }
@@ -264,7 +264,7 @@
             <!-- 메뉴 스타일 -->
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="#">소개</a>
+                    <a onclick="userintro()">소개</a>
                     <ul class="submenu">
                         <li><a href="#">항목 1</a></li>
                         <li><a href="#">항목 2</a></li>
@@ -272,7 +272,7 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="#">팀개설</a>
+                    <a onclick="teamcreate()">팀개설</a>
                     <ul class="submenu">
                         <li><a href="#">항목 1</a></li>
                         <li><a href="#">항목 2</a></li>
@@ -296,13 +296,14 @@
                         <img src="https://ifh.cc/g/x9T2z8.png" alt="코인" style="width: 20px; height: auto; margin-left: 5px;">
                     </button>
                     <button class="button bell2" style="font-size: 16px;">알림</button>
-                    <button class="button my-page2" style="font-size: 16px;">마이페이지</button>    
-                    <button class="logout2" style="font-size: 16px;">로그아웃</button>         
+                    <button class="button my-page2" style="font-size: 16px;" onclick="mypage()">마이페이지</button>    
+                    <button class="logout2" style="font-size: 16px;" onclick="logout()" >로그아웃</button>         
                 </div>
             </ul>
         </div>
         <div class="action-buttons">
-            <button class="logout" style="font-size: 16px;">로그아웃</button>
+            <button class="logout" style="font-size: 16px;" onclick="logout()">로그아웃</button>
+
             <button class="coin" style="margin-left: 2px; margin-right: 10px; font-size: 16px;">
                 1000
                 <img src="https://ifh.cc/g/x9T2z8.png" alt="코인" style="width: 20px; height: auto; margin-left: 5px;">
@@ -312,8 +313,8 @@
                     <img src="https://ifh.cc/g/jMOTza.png" alt="알림" style="width: 17px; height: auto;">
                 </a>
             </button>
-            <button class="button my-page" style="margin-right: 40px;">
-                <a href="#">
+            <button class="button my-page" style="margin-right: 40px;" onclick="mypage()">
+                <a href="">
                     <img src="https://ifh.cc/g/rng0oV.png" alt="마이페이지" style="width: 20px; height: auto;">
                 </a>
             </button>                 
@@ -321,6 +322,21 @@
     </div>
 
     <script>
+        function userintro() {
+            parent.location.href = '/userintro';
+        }
+        function board(){
+            alert("기능 추가 예정");
+        }
+        function teamcreate() {
+            parent.location.href = '/teamcreate';
+        }
+        function mypage() {
+            parent.location.href = '/mypage';
+        }
+        function logout() {
+            parent.location.href = '/logout';
+        }
         const menuItems = document.querySelectorAll('.menu-item');
         const hamburgerMenu = document.querySelector('.hamburger-menu');
         let isMenuOpen = false; // 메뉴 상태 변수 추가

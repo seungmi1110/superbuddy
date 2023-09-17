@@ -21,31 +21,40 @@ var LocalStrategy = require("passport-local");
 const session = require('express-session');
 
 app.use(session({secret : '비밀코드', resave : true, saveUninitialized: false}));
+
 passport.use(new LocalStrategy({
   usernameField: 'email'
-}, function(username, password, done) {
-  User.findOne({ email: username }, function (err, user) {
-    if (err) { return done(err); }
-    if (!user) { return done(null, false, { message: 'Incorrect username.' }); }
+}, async function(username, password, done) {
+  try {
+    const user = await User.findOne({ email: username });
+    if (!user) {
+      return done(null, false, { message: 'Incorrect username.' });
+    }
 
-    // passport-local-mongoose가 제공하는 함수를 사용하여 비밀번호를 비교합니다.
-    user.authenticate(password, function(err, authenticated, error) {
-      if (err) { return done(err); }
-      if (!authenticated) { return done(null, false, { message: 'Incorrect password.' }); }
-      return done(null, user);
-    });
-  });
+    const authenticated = await user.authenticate(password);
+    if (!authenticated) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+
+    return done(null, user);
+  } catch (error) {
+    return done(error);
+  }
 }));
+
 
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-      done(err, user);
-  });
+passport.deserializeUser(async function(id, done) {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -60,9 +69,7 @@ app.use(passport.session());
 
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://superb3739:superbuddy379300@superbuddy.iev3r.mongodb.net/', {
-  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
-}).then(() => {
+mongoose.connect('mongodb+srv://superb3739:superbuddy379300@superbuddy.iev3r.mongodb.net/').then(() => {
   console.log('MongoDB Connected...');
 }).catch(err => {
   console.log(err);
@@ -75,7 +82,15 @@ app.get("/",  function (req, res) {
   // 현재 로그인한 사용자 정보를 가져옵니다.
   res.sendFile(__dirname+ '/html/intro.html'); // 사용자 정보를 뷰로 전달합니다.
 });
+app.get("/userintro", isLoggedIn, function (req, res) {
+  // 현재 로그인한 사용자 정보를 가져옵니다.
+  res.sendFile(__dirname+ '/src/user_intropage.html'); // 사용자 정보를 뷰로 전달합니다.
+});
+app.get("/teamcreate", isLoggedIn,function (req, res) {
 
+  res.sendFile(__dirname+ '/src/teamCreate.html'); // 사용자 정보를 뷰로 전달합니다.
+});
+app.use('/src', express.static('src'));
 // Showing secret page
 app.get("/mypage", isLoggedIn, function (req, res) {
   res.render('mypage', { user: req.user });
@@ -136,7 +151,7 @@ app.post("/login", function(req, res, next) {
         return next(err);
       }
       
-      return res.redirect("/mypage"); // 로그인 성공 시 리디렉션
+      return res.redirect("/teamcreate"); // 로그인 성공 시 리디렉션
     });
   })(req, res, next);
 });
