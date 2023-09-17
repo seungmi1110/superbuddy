@@ -164,6 +164,8 @@ app.get("/logout", function (req, res) {
       return next(err);
     } else {
       console.log('로그아웃됨.');
+      alert("로그인이 필요합니다.");
+      
       res.redirect('/login');
     }
   });

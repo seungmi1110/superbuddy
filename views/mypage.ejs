@@ -344,8 +344,9 @@
               <div class="div6">
                 <div class="profile-info">
                     <div class="div7"><%= user.username %></div>
-                    <a class="a" id="link">
+                    <a class="a" onclick="edit()">
                         <div class="div8">프로필 수정</div>
+
                         <div class="item"></div>
                     </a>
                 </div>
@@ -376,12 +377,10 @@
     </div>
 
     <script>
-      var link = document.getElementById("link");
-      if (link) {
-        link.addEventListener("click", function (e) {
-          // Please sync "mypage_edit" to the project
-        });
+      function edit() {
+        alert("기능 추가 예정");
       }
+      
     </script>
   </body>
 </html>

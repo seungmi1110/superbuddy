@@ -280,7 +280,7 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="#">게시판</a>
+                    <a onclick="board()">게시판</a>
                     <ul class="submenu">
                         <li><a href="#">항목 1</a></li>
                         <li><a href="#">항목 2</a></li>
@@ -288,14 +288,14 @@
                     </ul>
                 </li>
                 <li>
-                    <button style="font-size: 16px;">구독하기</button>
+                    <button style="font-size: 16px;" onclick="subscribe()">구독하기</button>
                 </li>
                 <div class="hamburger-a-buttons">
                     <button class="coin2" style="margin-left: 2px; margin-right: 10px;">
-                        1000
+                        0
                         <img src="https://ifh.cc/g/x9T2z8.png" alt="코인" style="width: 20px; height: auto; margin-left: 5px;">
                     </button>
-                    <button class="button bell2" style="font-size: 16px;">알림</button>
+                    <button class="button bell2" style="font-size: 16px;"onclick="bell()>알림</button>
                     <button class="button my-page2" style="font-size: 16px;" onclick="mypage()">마이페이지</button>    
                     <button class="logout2" style="font-size: 16px;" onclick="logout()" >로그아웃</button>         
                 </div>
@@ -304,12 +304,12 @@
         <div class="action-buttons">
             <button class="logout" style="font-size: 16px;" onclick="logout()">로그아웃</button>
 
-            <button class="coin" style="margin-left: 2px; margin-right: 10px; font-size: 16px;">
-                1000
+            <button class="coin" style="margin-left: 2px; margin-right: 10px; font-size: 16px;"onclick="bell()">
+                0
                 <img src="https://ifh.cc/g/x9T2z8.png" alt="코인" style="width: 20px; height: auto; margin-left: 5px;">
             </button>
             <button class="button bell">
-                <a href="#">
+                <a onclick="bell()">
                     <img src="https://ifh.cc/g/jMOTza.png" alt="알림" style="width: 17px; height: auto;">
                 </a>
             </button>
@@ -322,6 +322,15 @@
     </div>
 
     <script>
+        function subscribe() {
+            alert("기능 추가 예정");
+        }
+        function coin() {
+            alert("기능 추가 예정");
+        }
+        function bell() {
+            alert("기능 추가 예정");
+        }
         function userintro() {
             parent.location.href = '/userintro';
         }
