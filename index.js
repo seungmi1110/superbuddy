@@ -76,7 +76,9 @@ mongoose.connect('mongodb+srv://superb3739:superbuddy379300@superbuddy.iev3r.mon
 });
 
 
-
+app.get("/subscribe", isLoggedIn, function (req, res) {
+  res.render('subscribe');
+});
 //add2ed code
 app.get("/",  function (req, res) {
   // 현재 로그인한 사용자 정보를 가져옵니다.
@@ -164,7 +166,7 @@ app.get("/logout", function (req, res) {
       return next(err);
     } else {
       console.log('로그아웃됨.');
-      alert("로그인이 필요합니다.");
+
       
       res.redirect('/login');
     }
