@@ -18,6 +18,8 @@
             background-color: #363535;
             position: absolute;
             border-radius: 0px 0px 0px 0px;
+            margin-top:0px;
+            margin-left:0px
             
         }
         #main {
@@ -152,8 +154,9 @@
     </style>
 </head>
 
+
 <body>
-    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%" z-index: 0;></iframe>
+    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
     <div>
         <div class="search-box">
             <input type="text" id="tagSearch" placeholder="검색할 #tag를 입력하세요" onkeydown="if(event.key === 'Enter') searchTags()">
@@ -228,12 +231,12 @@
             container.appendChild(hr);
 
             const gameTagParagraph = document.createElement("p");
-            gameTagParagraph.style = "margin-left: 10px; float: left; font-size: 12px; margin-top: 8px;";
+            gameTagParagraph.style = "margin-left: 10px; float: left; font-size: 12px; margin-top: 0px;";
             gameTagParagraph.textContent = gameTag;
             container.appendChild(gameTagParagraph);
 
             const capacityParagraph = document.createElement("p");
-            capacityParagraph.style = "margin-right: 20px; float: right; font-size: 12px; margin-top: 8px;";
+            capacityParagraph.style = "margin-right: 20px; float: right; font-size: 12px; margin-top: 0px;";
             capacityParagraph.textContent = capacity;
             container.appendChild(capacityParagraph);
 
