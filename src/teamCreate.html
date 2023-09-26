@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>팀 참가 페이지</title>
@@ -177,6 +178,7 @@
     
     
     <!-- JavaScript 함수 정의 -->
+    <script src="/index.js"></script>
     <script>
         // 팀 참가 컨테이너 생성 함수
         function createTeamContainer(imageSrc, title, user, tags1, tags2, time, gameTag, capacity, x, y, channelId) {
@@ -186,7 +188,7 @@
                 // 각 팀에 대한 고유한 페이지로 이동(뒤에 함수로 따로 showAlert 정의)
                 showAlert(`${title} 채널에 참가하시겠습니까?`, channelId);
             };
-
+            
             // 위치 설정
             container.style.left = x + "px";
             container.style.top = y + "px";
@@ -242,6 +244,7 @@
             return container;
         }
 
+
         // 팀 컨테이너 생성 및 추가
         const teamContainer1 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "즐겜합쉬다~~", "User1", "# Hello", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 189, 323,1);
         const teamContainer2 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 413, 323,2);
@@ -267,6 +270,7 @@
         document.body.appendChild(teamContainer9);
         document.body.appendChild(teamContainer10);
 
+        
         function showAlert(message, channelId) {
             // 모달 메시지 변경
             document.getElementById("modal-message").textContent = message;
@@ -287,8 +291,9 @@
         }
         function redirectToIndex(button, channelId) {
             if (button === 'Yes') {
-                parent.location.href = '/chats';
-                // window.location.href = `chats.html?channelId=${channelId}`;
+                window.location.href = "/chats?channelId=" + channelId;
+                
+                // window.location.href = `chats.?channelId=${channelId}`;
             } else {
                 // No 버튼을 클릭한 경우, 모달 닫기만 수행
                 closeModal();

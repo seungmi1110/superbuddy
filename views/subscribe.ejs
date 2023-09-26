@@ -6,6 +6,7 @@
 
     <style>
       body {
+        background-color: #363535;
         margin: 0;
         line-height: normal;
       }
@@ -48,6 +49,7 @@
       .frame2 {
         position: absolute;
         left: 0;
+        white-space: nowrap;
       }
 
       .div3 {
@@ -59,7 +61,7 @@
       .div1,
       .frame2 {
         top: 159px;
-        width: 415px;
+        width: 480px;
         height: 65px;
       }
 
@@ -93,6 +95,7 @@
         top: calc(50% + 23.5px);
         left: calc(50% - 161px);
         font-weight: 600;
+        white-space: nowrap;
       }
 
       .div4,
@@ -106,9 +109,9 @@
 
       .frame3 {
         top: 27px;
-        left: 483px;
+        left: 425px;
         height: 252px;
-        overflow: hidden;
+        /* overflow: hidden; */
         font-size: 50px;
       }
 
@@ -122,7 +125,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
 
       .head {
@@ -132,6 +135,7 @@
       .b {
         top: 0;
         left: calc(50% - 69px);
+        white-space: nowrap;
       }
 
       .b,
@@ -177,6 +181,7 @@
         position: absolute;
         top: 82px;
         left: 6px;
+        white-space: nowrap;
       }
 
       .div7 {
@@ -210,12 +215,12 @@
       .tagsearch-icon {
         position: absolute;
       }
-
+      
       .div8 {
         top: 0;
         left: 20px;
       }
-
+      
       .div9 {
         top: 22px;
         left: calc(50% - 86px);
@@ -253,6 +258,7 @@
       .div10 {
         top: 0;
         left: 0;
+        white-space: nowrap;
       }
 
       .div11 {
@@ -267,15 +273,17 @@
         position: absolute;
         top: 82px;
         left: 0;
-        width: 153px;
+        width: 280px; ;
         height: 30px;
+        
       }
-
+    
       .frame5,
       .multi {
         top: 0;
-        left: 670px;
+        left: 200px;
         height: 112px;
+        
       }
 
       .frame5 {
@@ -322,12 +330,12 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        padding: var(--padding-78xl) 38px var(--padding-78xl) 41px;
+        padding: 0px 38px var(--padding-78xl) 41px;
         box-sizing: border-box;
         align-items: center;
         justify-content: center;
         gap: 29px;
-        cursor: pointer;
+        
         text-align: left;
         font-size: var(--font-size-mini);
         color: var(--color-white);
@@ -341,11 +349,13 @@
     />
   </head>
   <body>
+    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+
     <div class="div" id="container2">
       <div class="head">
         <div class="frame">
           <div class="frame">
-            <img class="mask-group-icon" alt="" src="./public/mask-group@2x.png" />
+            <img class="mask-group-icon" alt="" src="https://ifh.cc/g/VO4g9H.png" />
 
             <div class="frame2">
               <div class="div1">
@@ -362,7 +372,7 @@
                 <img
                   class="supper-buddy-logo-1-icon"
                   alt=""
-                  src="./public/supperbuddy-logo-1@2x.png"
+                  src="https://ifh.cc/g/C95yQj.png"
                 />
               </div>
               <div class="ultra-buddy">ULTRA BUDDY</div>
@@ -410,12 +420,7 @@
     </div>
 
     <script>
-      var container2 = document.getElementById("container2");
-      if (container2) {
-        container2.addEventListener("click", function (e) {
-          // Please sync "구독 결제 팝업창" to the project
-        });
-      }
+      
     </script>
   </body>
 </html>
