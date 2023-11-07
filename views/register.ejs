@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <style>
+      body {
+        margin: 0;
+        line-height: normal;
+        overflow: hidden; 
+      }
+
+      :root {
+        /* fonts */
+        --font-roboto: Roboto;
+
+        /* font sizes */
+        --font-size-3xs: 10px;
+
+        /* Colors */
+        --color-white: #fff;
+        --color-gray: #1e1f22;
+        --color-deepskyblue: #00a8fc;
+        --color-lightslategray: #8b929a;
+
+        /* Gaps */
+        --gap-4xs: 9px;
+
+        /* Border radiuses */
+        --br-8xs: 5px;
+      }
+
+      
+      .intro-top-1-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1512px;
+        height: 979px;
+        object-fit: cover;
+      }
+
+      .regiback-icon {
+        position: relative;
+        border-radius: var(--br-8xs);
+        width: 413px;
+        height: 492px;
+        z-index: 0;
+      }
+
+      .register1 {
+        position: absolute;
+        margin: 0 !important;
+        top: 415px;
+        left: 45px;
+        z-index: 1;
+        color: var(--color-deepskyblue);
+      }
+
+      .term {
+        position: absolute;
+        margin: 0 !important;
+        top: 400px;
+        left: 45px;
+        font-size: 8px;
+        z-index: 2;
+        color: var(--color-lightslategray);
+      }
+
+      .div1 {
+        position: relative;
+        font-weight: 500;
+        color: var(--color-white);
+      }
+
+      .regibutton {
+        cursor: pointer;
+        padding: 0;
+        margin: 0 !important;
+        position: absolute;
+        top: 355px;
+        left: 45px;
+        border: 0;
+        background-color: #5865f2;
+        display: flex;
+        flex-direction: row;
+        padding: 10px 134px;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--br-8xs);
+        font-size: 15px;
+      }
+      .regibutton-child{
+        top: 0;
+        border-radius: var(--br-8xs);
+        background-color: #5865f2;
+        
+        
+        
+      }
+      .email-child {
+        position: relative;
+        border-radius: var(--br-8xs);
+        background-color: var(--color-gray);
+        
+      }
+      .username-child {
+        position: relative;
+        border-radius: var(--br-8xs);
+        background-color: var(--color-gray);
+        
+      }
+      .password-child {
+        position: relative;
+        border-radius: var(--br-8xs);
+        background-color: var(--color-gray);
+        
+      }
+      .email,
+      .nickname,
+      .password {
+        
+        
+        position: absolute;
+        top: 276px;
+        left: 57px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: var(--gap-4xs);
+        z-index: 4;
+        transform: translate(-4%, -27%);
+      }
+
+      .nickname {
+        top: 191px;
+        z-index: 5;
+      }
+
+      .id-mail {
+        position: relative;
+      }
+
+      .div4,
+      .email {
+        position: absolute;
+        margin: 0 !important;
+      }
+
+      .email {
+        top: 110px;
+        left: 57px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 8px;
+        z-index: 6;
+      }
+
+      .div4 {
+        top: 48px;
+        left: 161px;
+        font-size: 25px;
+        font-weight: 600;
+        z-index: 7;
+        
+      }
+
+      .register,
+      .registerpop {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+      } 
+
+      .registerpop {
+        position: relative;
+        gap: 10px;
+        
+      }
+
+      .register {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .password i {
+        position: absolute;
+        right: 10px;
+        top: 55%;
+        transform: translateY(-50%);
+        color: white;
+        cursor: pointer; /* 아이콘에 커서 스타일 추가 */
+    }
+      .div {
+        position: relative;
+        background-color: #130035;
+        width: 100%;
+        height: 979px;
+        overflow-y: auto;
+        text-align: left;
+        font-size: var(--font-size-3xs);
+        color: var(--color-white);
+        font-family: var(--font-roboto);
+      }
+
+      /* Added styles for input elements */
+      input[type="username"],
+      input[type="email"],
+      input[type="password"],
+      input[type="text"] {
+        width: 300px;
+
+
+        padding: 10px;
+        border: none;
+        border-radius: var(--br-8xs);
+        /* margin-bottom: 20px; */
+        font-size: 15px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: #5865f2;
+        color: white;
+        border: none;
+        border-radius: var(--br-8xs);
+      }
+
+      .btn-success {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: var(--br-8xs);
+      }
+      .form-control:focus {
+        background-color: var(--color-aliceblue) !important;
+        color: #1e1f22 !important;
+      }
+      .password-child i{
+        position: absolute;
+        /* left: 70px;
+        top: 60px; */
+        color: white;
+      }
+      .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap"
+    />
+  </head>
+  <body>
+    <div class="div">
+      <img class="intro-top-1-icon" alt="" src="https://ifh.cc/g/3DxObF.jpg" />
+
+      <div class="register">
+        <div class="div4">가입하기</div>
+        <form action="/register" method="post">
+          <div class="registerpop">
+
+            <img class="regiback-icon" alt="" src="https://ifh.cc/g/NcSV6G.png" />
+            <a href="/login" class="register1">
+              <span>이미 계정이 있으신가요?</span>
+            </a>
+            <div class="email">
+              <div class="id-mail">ID (mail)</div>
+              <input
+                type="email"
+                name="email"
+                class="email-child"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                value=""
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              />
+              <div class="error-message" id="emailError"></div>
+            </div>
+            <div class="nickname">
+              <div class="id-mail">별명</div>
+              <input
+                type="username"
+                name="username"
+                class="username-child"
+                id="username"
+                aria-describedby="emailHelp"
+                placeholder="Enter username"
+                value=""
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              />
+              <div class="error-message" id="usernameError"></div>
+            </div>
+            <div class="password">
+              <div class="id-mail">비밀번호</div>
+              <input
+                type="password"
+                name="password"
+                class="password-child"
+                id="password"
+                aria-describedby="emailHelp"
+                placeholder="*********"
+                value=""
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              />
+              <i class="far fa-eye" id="togglePassword"></i>
+              <div class="error-message" id="passwordError"></div>
+            </div>
+            <div class="term">
+              <span>등록하는 순간 SuperBuddy의 </span>
+              <span class="span">서비스 이용 약관</span>
+              <span>와</span>
+              <span class="span"> 개인정보 보호 정책</span>
+              <span>에 동의하게 됩니다. </span>
+              <span class="span"> </span>
+            </div>
+            <button class="regibutton" autofocus="{true}">
+              <div class ="regibutton-child"></div>
+              <div class="div1">계속하기</div>
+            </div>
+            
+            
+            
+        </form>    
+      </div>
+    </div>
+    </div>
+    <script>
+      function changeTextColor(element, isFocused) {
+      if (isFocused) {
+        element.style.backgroundColor = '#e8f0fe'; // 포커스시 밝은 색상
+        element.style.color = 'var(--color-gray)';
+        const eyeIcon = document.querySelector('.fa-eye');
+        if (element.classList.contains('password-child')) {
+            eyeIcon.style.color = 'var(--color-gray)';
+          }
+      } else {
+        element.style.backgroundColor = '#1e1f22'; // 포커스 해제시 어두운 색상
+        element.style.color = 'var(--color-white)';
+        const eyeIcon = document.querySelector('.fa-eye');
+        if (element.classList.contains('password-child')) {
+            eyeIcon.style.color = 'white';
+          }
+      }
+    }
+      
+      const togglePassword = document.querySelector('#togglePassword');
+      const password = document.querySelector('.password-child');  // Change this line
+      
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+
+
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+        const username = document.querySelector('#username').value;
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
+
+        // 에러 메시지 초기화
+        document.querySelector('#usernameError').textContent = '';
+        document.querySelector('#emailError').textContent = '';
+        document.querySelector('#passwordError').textContent = '';
+
+        if (!username) {
+          e.preventDefault(); 
+          document.querySelector('#usernameError').textContent = '별명을 입력하세요.';
+        }
+
+        if (!email) {
+          e.preventDefault(); 
+          document.querySelector('#emailError').textContent = '이메일을 입력하세요.';
+        }
+
+        if (!password) {
+          e.preventDefault(); 
+          document.querySelector('#passwordError').textContent = '비밀번호를 입력하세요.';
+        }
+      });
+    </script>
+  </body>
+</html>

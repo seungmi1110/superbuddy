@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팀 참가 페이지</title>
+    <link rel="icon" href="https://ifh.cc/g/6gwYnQ.png">
+    
+    <!-- 스타일 직접 추가 -->
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: block;
+            background-color: #363535;
+            position: absolute;
+            border-radius: 0px 0px 0px 0px;
+            
+        }
+        #main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .search-box {
+            position: relative;
+            width: 889px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            background-color: #e4e4e4;
+            position: absolute;
+            border-radius: 10px;
+            left: 238px;
+            top: 211px;
+        }
+        /* 검색 입력 필드 스타일 */
+        #tagSearch {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 5px;
+            font-size: 14px;
+            outline: none;
+            margin-left: 10px;
+        }
+        /* 검색 버튼 스타일 */
+        .search-box button {
+            width: 20px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 20px;
+        }
+        .tag {
+            display: none;
+            position: absolute;
+            left: 238px;
+            top: 260px;
+            background: #247BFF;
+            border-radius: 34px;
+            color: #fff;
+            padding: 5px 10px; /* 태그 내용 간격 조정 */
+        }
+
+        .teamJoin-container {
+            width: 180px;
+            height: 333px;
+            display: block;
+            overflow: visible;
+            background-color: #F4F4F4;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            border-radius: 0px 0px 0px 0px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .team-image {
+            width: 170px;
+            height: 133px;
+            display: block;
+            margin-top: 5px;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-radius: 10px;
+        }
+        /* 제목 텍스트 줄 바꿈 방지 */
+        .teamJoin-container p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #3A3A3A;
+            border-radius: 5px;
+            padding: 30px 120px;
+            text-align: center;
+            width: 300px;
+            z-index: 100;
+            white-space: nowrap;
+        }
+        .modal p {
+            font-size: 18px;
+            color: #d9d9d9;
+            margin-bottom: 10px;
+        }
+        /* 모달 헤더 스타일 */
+        .modal-header {
+            text-align: center;
+        }
+        /* 모달 닫기 버튼 */
+        .close {
+            display: none;
+        }
+        /* 모달 버튼 스타일 */
+        .modal-button {
+            font-size: 14px;
+            padding: 10px 50px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .yes-button {
+            background-color: #FF359A;
+            color: #fff;
+        }
+        .no-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+        /* 모달 버튼 컨테이너 스타일 */
+        .modal-button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+    <div>
+        <div class="search-box">
+            <input type="text" id="tagSearch" placeholder="검색할 #tag를 입력하세요" onkeydown="if(event.key === 'Enter') searchTags()">
+            <button onclick="searchTags()" style="background-image: url('https://ifh.cc/g/odT7PC.png'); 
+            background-size: cover; width: 20px; height: 20px;"></button>
+        </div>
+        <button id="tags" class="tag" onclick="closeTag(this)"></button>
+        <button id="tagsContainer" class="tag" style="border: none;"></button>
+    </div>
+    <!-- 모달 -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <p id="modal-message">내용 추가1 클릭됨</p>
+            <div class="modal-button-container">
+                <button class="modal-button yes-button" onclick="redirectToIndex('Yes')">Yes</button>
+                <button class="modal-button no-button" onclick="closeModal('No')">No</button>
+            </div>
+        </div>
+    </div>
+    <!-- 상단바를 로드할 컨테이너 -->
+    
+    
+    <!-- JavaScript 함수 정의 -->
+    <script>
+        // 팀 참가 컨테이너 생성 함수
+        function createTeamContainer(imageSrc, title, user, tags1, tags2, time, gameTag, capacity, x, y, channelId) {
+            const container = document.createElement("div");
+            container.className = "teamJoin-container";
+            container.onclick = function() {
+                // 각 팀에 대한 고유한 페이지로 이동(뒤에 함수로 따로 showAlert 정의)
+                showAlert(`${title} 채널에 참가하시겠습니까?`, channelId);
+            };
+
+            // 위치 설정
+            container.style.left = x + "px";
+            container.style.top = y + "px";
+
+            const image = document.createElement("img");
+            image.src = imageSrc;
+            image.alt = "기본 이미지";
+            image.className = "team-image";
+            container.appendChild(image);
+
+            const titleParagraph = document.createElement("p");
+            titleParagraph.style = "margin-left: 10px; font-size: 18px; margin-bottom: -10px;";
+            titleParagraph.textContent = title;
+            container.appendChild(titleParagraph);
+
+            const userParagraph = document.createElement("p");
+            userParagraph.style = "margin-left: 10px; font-size: 12px; margin-bottom: 15px;";
+            userParagraph.textContent = user;
+            container.appendChild(userParagraph);
+
+            const tagsParagraph1 = document.createElement("p");
+            tagsParagraph1.style = "margin-left: 10px; font-size: 12px; margin-bottom: -10px;";
+            tagsParagraph1.textContent = tags1;
+            container.appendChild(tagsParagraph1);
+
+            const tagsParagraph2 = document.createElement("p");
+            tagsParagraph2.style = "margin-left: 10px; font-size: 12px;";
+            tagsParagraph2.textContent = tags2;
+            container.appendChild(tagsParagraph2);
+
+            const timeParagraph = document.createElement("p");
+            timeParagraph.style = "margin-left: 10px; font-size: 12px;";
+            timeParagraph.textContent = time;
+            container.appendChild(timeParagraph);
+
+            const hr = document.createElement("hr");
+            container.appendChild(hr);
+
+            const gameTagParagraph = document.createElement("p");
+            gameTagParagraph.style = "margin-left: 10px; float: left; font-size: 12px; margin-top: 8px;";
+            gameTagParagraph.textContent = gameTag;
+            container.appendChild(gameTagParagraph);
+
+            const capacityParagraph = document.createElement("p");
+            capacityParagraph.style = "margin-right: 20px; float: right; font-size: 12px; margin-top: 8px;";
+            capacityParagraph.textContent = capacity;
+            container.appendChild(capacityParagraph);
+
+            const clearDiv = document.createElement("div");
+            clearDiv.style = "clear: both;";
+            container.appendChild(clearDiv);
+
+            return container;
+        }
+
+        // 팀 컨테이너 생성 및 추가
+        const teamContainer1 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "즐겜합쉬다~~", "User1", "# Hello", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 189, 323,1);
+        const teamContainer2 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 413, 323,2);
+        const teamContainer3 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 637, 323,3);
+        const teamContainer4 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 861, 323,4);
+        const teamContainer5 = createTeamContainer("https://ifh.cc/g/79hwG4.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 1085, 323,5);
+
+        const teamContainer6 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "즐겜합쉬다~~", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 189, 686,6);
+        const teamContainer7 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 413, 686,7);
+        const teamContainer8 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 637, 686,8);
+        const teamContainer9 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 861, 686,9);
+        const teamContainer10 = createTeamContainer("https://ifh.cc/g/VA7abX.jpg", "Title1", "User1", "# Tag1", "# Tag2", "Time : 00:00 ~ 00:00", "# GameTag", "4/5", 1085, 686,10);
+
+        document.body.appendChild(teamContainer1);
+        document.body.appendChild(teamContainer2);
+        document.body.appendChild(teamContainer3);
+        document.body.appendChild(teamContainer4);
+        document.body.appendChild(teamContainer5);
+
+        document.body.appendChild(teamContainer6);
+        document.body.appendChild(teamContainer7);
+        document.body.appendChild(teamContainer8);
+        document.body.appendChild(teamContainer9);
+        document.body.appendChild(teamContainer10);
+
+        function showAlert(message, channelId) {
+            // 모달 메시지 변경
+            document.getElementById("modal-message").textContent = message;
+            // 모달 보이기
+            document.getElementById("myModal").style.display = "block";
+
+            // Yes 버튼을 클릭한 경우 페이지 이동, No 버튼을 클릭한 경우 모달 닫기
+            const yesButton = document.querySelector(".yes-button");
+
+            yesButton.onclick = function() {
+                closeModal();
+                redirectToIndex('Yes',channelId);
+            };
+
+        }
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+        function redirectToIndex(button, channelId) {
+            if (button === 'Yes') {
+                window.location.href = "/chats?channelId=" + channelId;
+                // parent.location.href = '/chats';
+                // window.location.href = `chats.html?channelId=${channelId}`;
+            } else {
+                // No 버튼을 클릭한 경우, 모달 닫기만 수행
+                closeModal();
+            }
+
+        }
+
+        function searchTags() {
+            const tagSearch = document.getElementById("tagSearch");
+            const tagsContainer = document.getElementById("tagsContainer");
+            const allTeamContainers = document.querySelectorAll(".teamJoin-container");
+            const searchValue = tagSearch.value.trim().toLowerCase(); // 검색어를 소문자로 변환하여 대소문자 구분 없이 비교
+
+            // 검색어가 입력되었을 때만 tag를 보이게 함
+            if (tagSearch.value.trim() !== "") {
+                // 입력된 태그를 현재 태그에 추가
+                tags.textContent += ` #${searchValue}`;
+                tags.style.display = "block";
+
+                // 검색 이후 검색 입력 필드 초기화
+                tagSearch.value = "";
+            } else {
+                tags.style.display = "none"; // 검색어가 없으면 tag를 숨김
+            }
+
+            // 검색어가 비어 있지 않은 경우
+            if (searchValue !== "") {
+                // 모든 팀 컨테이너 숨기기
+                allTeamContainers.forEach(teamContainer => {
+                    teamContainer.style.display = "none";
+                });
+
+                // 검색어와 일치하는 팀 컨테이너 보이기
+                allTeamContainers.forEach(teamContainer => {
+                    const tagsParagraph1 = teamContainer.querySelector("p:nth-child(4)").textContent.toLowerCase();
+                    const tagsParagraph2 = teamContainer.querySelector("p:nth-child(5)").textContent.toLowerCase();
+                    const gameTagParagraph = teamContainer.querySelector("p:nth-child(8)").textContent.toLowerCase();
+
+                    if (tagsParagraph1.includes(searchValue) || tagsParagraph2.includes(searchValue) || gameTagParagraph.includes(searchValue)) {
+                        // 검색어와 일치하는 부분이 있는 팀 컨테이너 보이기
+                        teamContainer.style.display = "block";
+                    }
+                });
+            }
+        }
+
+        function closeTag() {
+            const forTagtoContainer = document.querySelectorAll(".teamJoin-container");
+            // 태그 내용을 지움
+            tags.textContent = "";
+            tagSearch.value = "";
+            tags.style.display = "none";
+            searchTags();
+            // 모든 팀 컨테이너를 다시 표시
+            forTagtoContainer.forEach(teamContainer => {
+                teamContainer.style.display = "block";
+            });
+        }
+
+
+
+    </script>
+</body>
+</html>

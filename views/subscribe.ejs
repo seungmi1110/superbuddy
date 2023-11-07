@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <style>
+      body {
+        background-color: #363535;
+        margin: 0;
+        line-height: normal;
+      }
+
+      :root {
+        /* fonts */
+        --font-roboto: Roboto;
+
+        /* font sizes */
+        --font-size-6xs: 7px;
+        --font-size-mini: 15px;
+
+        /* Colors */
+        --color-white: #fff;
+
+        /* Paddings */
+        --padding-78xl: 97px;
+
+        /* Border radiuses */
+        --br-3xs: 10px;
+      }
+
+      .mask-group-icon {
+        position: absolute;
+        top: calc(50% - 153px);
+        left: calc(50% - 643.5px);
+        width: 1287px;
+        height: 306px;
+        object-fit: cover;
+      }
+
+      .div2 {
+        position: absolute;
+        top: 47px;
+        left: calc(50% - 162.5px);
+      }
+
+      .div1,
+      .div3,
+      .frame2 {
+        position: absolute;
+        left: 0;
+        white-space: nowrap;
+      }
+
+      .div3 {
+        top: 0;
+        font-size: 32px;
+        font-weight: 600;
+      }
+
+      .div1,
+      .frame2 {
+        top: 159px;
+        width: 415px;
+        height: 65px;
+      }
+
+      .frame2 {
+        top: 41px;
+        left: 431px;
+        height: 224px;
+        overflow: hidden;
+      }
+
+      .supper-buddy-logo-1-icon {
+        position: absolute;
+        top: calc(50% - 53px);
+        left: calc(50% - 55px);
+        width: 100.32px;
+        height: 106px;
+        object-fit: cover;
+      }
+
+      .frame4 {
+        position: absolute;
+        top: 0;
+        left: 106px;
+        width: 110px;
+        height: 106px;
+        overflow: hidden;
+      }
+
+      .ultra-buddy {
+        position: absolute;
+        top: calc(50% + 23.5px);
+        left: calc(50% - 161px);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .div4,
+      .frame3 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 322px;
+        height: 165px;
+      }
+
+      .frame3 {
+        top: 27px;
+        left: 483px;
+        height: 252px;
+        /* overflow: hidden; */
+        font-size: 50px;
+      }
+
+      .frame,
+      .head {
+        width: 1287px;
+        height: 306px;
+      }
+
+      .frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* overflow: hidden; */
+      }
+
+      .head {
+        position: relative;
+      }
+
+      .b {
+        top: 0;
+        left: calc(50% - 69px);
+        white-space: nowrap;
+      }
+
+      .b,
+      .div5,
+      .parent {
+        position: absolute;
+      }
+
+      .div5 {
+        top: 35px;
+        left: calc(50% - 25px);
+        font-size: var(--font-size-mini);
+      }
+
+      .parent {
+        top: 10px;
+        left: 534px;
+        width: 138px;
+        height: 53px;
+      }
+
+      .header,
+      .icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 70px;
+      }
+
+      .header {
+        border-radius: var(--br-3xs) var(--br-3xs) 0 0;
+        background: linear-gradient(90.8deg, #f69, #0085ff);
+        width: 1206px;
+      }
+
+      .icon {
+        width: 143px;
+        object-fit: cover;
+      }
+
+      .div6,
+      .div7 {
+        position: absolute;
+        top: 82px;
+        left: 6px;
+        white-space: nowrap;
+      }
+
+      .div7 {
+        top: 104px;
+        left: 31px;
+        font-size: var(--font-size-6xs);
+      }
+
+      .unlimited {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 143px;
+        height: 112px;
+      }
+
+      .tagsearch-icon {
+        height: 62.62%;
+        width: 40.78%;
+        top: 0;
+        right: 29.57%;
+        bottom: 37.38%;
+        left: 29.65%;
+        max-width: 100%;
+        overflow: hidden;
+        max-height: 100%;
+      }
+
+      .div8,
+      .div9,
+      .tagsearch-icon {
+        position: absolute;
+      }
+
+      .div8 {
+        top: 0;
+        left: 20px;
+      }
+
+      .div9 {
+        top: 22px;
+        left: calc(50% - 86px);
+        font-size: var(--font-size-6xs);
+      }
+
+      .group,
+      .tag {
+        position: absolute;
+        top: 82px;
+        left: 0;
+        width: 172px;
+        height: 30px;
+      }
+
+      .tag {
+        top: 0;
+        left: 325px;
+        height: 112px;
+      }
+
+      .chat-icon {
+        top: 0;
+        left: 42px;
+        width: 70px;
+        height: 70px;
+      }
+
+      .chat-icon,
+      .div10,
+      .div11 {
+        position: absolute;
+      }
+
+      .div10 {
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+      }
+
+      .div11 {
+        top: 22px;
+        left: calc(50% - 47.5px);
+        font-size: var(--font-size-6xs);
+      }
+
+      .frame5,
+      .multi,
+      .multipleroomdetail {
+        position: absolute;
+        top: 82px;
+        left: 0;
+        width: 153px;
+        height: 30px;
+      }
+
+      .frame5,
+      .multi {
+        top: 0;
+        left: 670px;
+        height: 112px;
+      }
+
+      .frame5 {
+        top: 117px;
+        left: 188px;
+        width: 823px;
+        overflow: hidden;
+        font-size: var(--font-size-mini);
+      }
+
+      .detail {
+        position: relative;
+        border-radius: var(--br-3xs);
+        background-color: #232323;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        width: 1206px;
+        height: 291px;
+        font-size: 30px;
+      }
+
+      .buttontext {
+        position: absolute;
+        top: calc(50% - 11.5px);
+        left: calc(50% - 57.5px);
+      }
+
+      .div,
+      .subbutton {
+        position: relative;
+      }
+
+      .subbutton {
+        border-radius: 5px;
+        background: linear-gradient(90.8deg, #f69, #0085ff);
+        width: 219px;
+        height: 53px;
+        font-size: 20px;
+      }
+
+      .div {
+        background-color: #363535;
+        width: 100%;
+        height: 979px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 0px 38px var(--padding-78xl) 41px;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
+        gap: 29px;
+        /* cursor: pointer; */
+        text-align: left;
+        font-size: var(--font-size-mini);
+        color: var(--color-white);
+        font-family: var(--font-roboto);
+      }
+    </style>
+
+    <meta
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+    <div class="div" id="container2">
+      <div class="head">
+        <div class="frame">
+          <div class="frame">
+            <img class="mask-group-icon" alt="" src="./public/mask-group@2x.png" />
+
+            <div class="frame2">
+              <div class="div1">
+                <div class="div2">
+                  지금 울트라버디로 많은 사람들과 더 오래 즐겨보세요
+                </div>
+                <div class="div3">끊김없이, 함께 즐기는 슈퍼버디</div>
+              </div>
+            </div>
+          </div>
+          <div class="frame3">
+            <div class="div4">
+              <div class="frame4">
+                <img
+                  class="supper-buddy-logo-1-icon"
+                  alt=""
+                  src="https://ifh.cc/g/C95yQj.png"
+                />
+              </div>
+              <div class="ultra-buddy">ULTRA BUDDY</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail">
+        <div class="header">
+          <div class="parent">
+            <b class="b">울트라버디</b>
+            <div class="div5">4900원</div>
+          </div>
+        </div>
+        <div class="frame5">
+          <div class="unlimited">
+            <img class="icon" alt="" src="./public/-1@2x.png" />
+
+            <div class="div6">파티 지속시간 무제한</div>
+            <div class="div7">*기본 제공 10시간, 연장가능</div>
+          </div>
+          <div class="tag">
+            <img class="tagsearch-icon" alt="" src="./public/tagsearch.svg" />
+
+            <div class="group">
+              <div class="div8">더 많은 파티 태그 수</div>
+              <div class="div9">
+                더 많아진 11개의 태그로 나와 맞는 파티원을 구할 수 있어요
+              </div>
+            </div>
+          </div>
+          <div class="multi">
+            <img class="chat-icon" alt="" src="./public/chat.svg" />
+
+            <div class="multipleroomdetail">
+              <div class="div10">여러 파티 동시 참여 기능</div>
+              <div class="div11">원하는 파티에 마음껏 참여하세요</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subbutton">
+        <b class="buttontext">구독 시작하기</b>
+      </div>
+    </div>
+
+    <!-- <script>
+      var container2 = document.getElementById("container2");
+      if (container2) {
+        container2.addEventListener("click", function (e) {
+          // Please sync "구독 결제 팝업창" to the project
+        });
+      }
+    </script> -->
+  </body>
+</html>

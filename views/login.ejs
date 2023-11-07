@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <style>
+      body {
+        margin: 0;
+        line-height: normal;
+        overflow: hidden; 
+      }
+
+      :root {
+        /* fonts */
+        --font-roboto: Roboto;
+
+        /* font sizes */
+        --font-size-3xs: 10px;
+
+        /* Colors */
+        --color-orangered: #fc4c00;
+        --color-gray: #1e1f22;
+        --color-white: #fff;
+        --color-deepskyblue: #00a8fc;
+        --color-aliceblue: #e8f0fe;
+
+        /* Border radiuses */
+        --br-8xs: 5px;
+      }
+
+      .backrect-icon,
+      .intro-top-1-icon {
+        position: absolute;
+        object-fit: cover;
+      }
+
+      .intro-top-1-icon {
+        top: 0;
+        left: 0;
+        width: 1512px;
+        height: 979px;
+      }
+
+      .backrect-icon {
+        top: calc(50% - 180px);
+        left: calc(50% - 347px);
+        border-radius: var(--br-8xs);
+        width: 694px;
+        height: 360px;
+      }
+
+      .welcome-super {
+        position: absolute;
+        top: 38px;
+        left: 50%;
+        font-size: 25px;
+        font-weight: 600;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+        line-height: 1; /* 추가된 부분 */
+      }
+
+      .span {
+        color: var(--color-orangered);
+      }
+
+      .id-mail-container,
+      .mail-child {
+        position: absolute;
+        top: 20;
+        left: 0;
+      }
+
+      .mail-child {
+        border: 0;
+        background-color: #1e1f22;
+        top: 20px;
+        border-radius: var(--br-8xs);
+        width: 300px;
+        height: 35px;
+      }
+
+      .login-button-child,
+      .mail {
+        position: absolute;
+        top: 63px;
+        left: 0;
+        width: 300px;
+        height: 55px;
+      }
+
+      .login-button-child {
+        top: 0;
+        border-radius: var(--br-8xs);
+        background-color: #5865f2;
+        height: 39px;
+      }
+
+      .div1 {
+        position: absolute;
+        top: 10px;
+        left: 128.57px;
+        font-size: 15px;
+        font-weight: 500;
+        font-family: var(--font-roboto);
+        color: var(--color-white);
+        text-align: left;
+        display: inline-block;
+        width: 43.88px;
+        height: 18px;
+      }
+
+      .login-button {
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        background-color: transparent;
+        position: absolute;
+        top: 232px;
+        left: 0;
+        width: 300px;
+        height: 39px;
+      }
+
+      .span1 {
+        color: var(--color-aliceblue);
+      }
+
+      .span2 {
+        color: var(--color-deepskyblue);
+      }
+
+      .registerclick {
+        text-decoration: none;
+        position: absolute;
+        top: 280px;
+        left: 1px;
+        color: #8b929a;
+      }
+
+      .password-child {
+        border: 0;
+        background-color: #1e1f22;
+        position: absolute;
+        top: 21px;
+        left: 0;
+        border-radius: var(--br-8xs);
+        width: 300px;
+        height: 35px;
+      }
+      .password-child i{
+        position: absolute;
+        left: 70px;
+        top: 50px;
+        color: white;
+      }
+      
+      
+      .color-icon {
+        position: relative;
+        width: 15px;
+        height: 10.23px;
+        object-fit: cover;
+      }
+
+      .div2,
+      .password {
+        position: absolute;
+        top: 62px;
+        left: 0;
+      }
+
+      .div3,
+      .password {
+        top: 0;
+        color: var(--color-white);
+      }
+      .div3 {
+        position: relative;
+      }
+
+      .div3 i {
+          position: absolute;
+          right: 10px; /* Adjust the value as needed */
+          top: 40px;
+          transform: translateY(-50%);
+          cursor: pointer;
+      }
+
+      .password {
+        top: 137px;
+        width: 300px;
+        height: 74px;
+        color: var(--color-deepskyblue);
+      }
+
+      .login {
+        position: absolute;
+        top: 38px;
+        left: 197px;
+        width: 302px;
+        height: 292px;
+      }
+
+      .login-screen {
+        position: absolute;
+        top: 25%;
+        left: calc(50% - 347px);
+        width: 694px;
+        height: 360px;
+      }
+
+      .div {
+        position: relative;
+        background-color: #130035;
+        width: 100%;
+        height: 979px;
+        overflow-y: auto;
+        text-align: left;
+        font-size: var(--font-size-3xs);
+        color: var(--color-white);
+        font-family: var(--font-roboto);
+      }
+
+      .form-control:focus {
+        background-color: var(--color-aliceblue) !important;
+        color: #1e1f22 !important;
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap"
+    />
+    
+  </head>
+  <body>
+    <% if (messages.error) { %>
+      <p style="color:red"><%- messages.error %></p>
+    <% } %>
+        
+    <% if (messages.success) { %>
+          <p style="color:green"><%- messages.success %></p>
+    <% } %>
+    <div class="div">
+      <img class="intro-top-1-icon" alt="" src="https://ifh.cc/g/3DxObF.jpg" />
+
+      <div class="login-screen">
+        <img class="backrect-icon" alt="" src="https://ifh.cc/g/VRsqZn.png" />
+      
+        <div class="login">
+          <div class="welcome-super">WELCOME ! SUPER BUDDY</div>
+          <form action="/login" method="post" name="form1">
+            <div class="mail">
+              <label for="exampleInputEmail1">ID (mail)</label>
+              <input 
+                type="email" 
+                name="email" 
+                class="form-control mail-child" 
+                id="email" 
+                aria-describedby="emailHelp" 
+                placeholder="Enter email" 
+                value=""
+                onfocus="changeTextColor(this, true)"
+                onblur="changeTextColor(this, false)"
+              >
+            </div>
+            
+            
+            <div class="password">
+              <div class="div3">
+                <span>비밀번호 </span>
+                <input 
+                    class="form-control password-child" 
+                    name="password" 
+                    type="password" 
+                    placeholder="Enter password" 
+                    onfocus="changeTextColor(this, true)"
+                    onblur="changeTextColor(this, false)"
+                />
+                <i class="far fa-eye" id="togglePassword"></i>
+            </div>
+              <div class="div2">
+                <a onclick=forgotMypassword();>비밀번호를 잊으셨나요?</a>
+              </div>
+              
+            </div>
+            <button class="login-button" autofocus="{true}">
+              <div class="login-button-child"></div>
+              <div class="div1">로그인</div>
+            </button>
+            <a href="/register" class="registerclick">
+              <span>계정이 필요하신가요?</span>
+              <span class="span1"> </span>
+              <span class="span2">가입하기</span>
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      function changeTextColor(element, isFocused) {
+        if (isFocused) {
+          element.style.color = 'var(--color-deepskyblue)';
+          const eyeIcon = document.querySelector('.fa-eye');
+          if (element.classList.contains('password-child')) {
+            eyeIcon.style.color = 'var(--color-gray)';
+          }
+        } else {
+          element.style.color = 'var(--color-white)';
+          const eyeIcon = document.querySelector('.fa-eye');
+          if (element.classList.contains('password-child')) {
+            eyeIcon.style.color = 'white';
+          }
+        }
+      }
+
+
+      
+      const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('.password-child');  // Change this line
+
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+
+      function forgotMypassword(){
+        alert("기능 추가 중입니다.");
+      }
+    </script>
+  </body>
+</html>
