@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    line-height: normal;
+  }
+  
+  :root {
+    /* fonts */
+    --font-roboto: Roboto;
+  
+    /* font sizes */
+    --font-size-2xs: 11px;
+    --font-size-mini: 15px;
+    --font-size-smi: 13px;
+  
+    /* Colors */
+    --color-gray-100: #888;
+    --states-white-overlay-hover: rgba(255, 255, 255, 0.04);
+    --color-silver-100: #bfbfbf;
+    --color-silver-200: #b8b8b8;
+    --color-white: #fff;
+    --color-dimgray: #5f5f5f;
+  
+    /* Gaps */
+    --gap-9xl: 28px;
+  
+    /* Border radiuses */
+    --br-xs: 12px;
+    --br-3xs: 10px;
+  }
+  

@@ -298,6 +298,10 @@ app.get("/chats", isLoggedIn, function (req, res) {
   res.sendFile(__dirname+ '/src/chats.html'); // 사용자 정보를 뷰로 전달합니다.
   // dirname+ '/src/chats.html'+ 'channelId=' + channelId
 });
+app.get("/board", isLoggedIn, function (req, res) {
+  // 현재 로그인한 사용자 정보를 가져옵니다.
+  res.sendFile(__dirname+ '/src/board.html'); // 사용자 정보를 뷰로 전달합니다.
+});
 //add2ed code
 app.get("/",  function (req, res) {
   // 현재 로그인한 사용자 정보를 가져옵니다.
