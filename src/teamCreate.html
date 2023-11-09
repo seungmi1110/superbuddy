@@ -179,12 +179,12 @@
     <!-- JavaScript 함수 정의 -->
     <script>
         // 팀 참가 컨테이너 생성 함수
-        function createTeamContainer(imageSrc, title, user, tags1, tags2, time, gameTag, capacity, x, y, channelId) {
+        function createTeamContainer(imageSrc, title, user, tags1, tags2, time, gameTag, capacity, x, y, room) {
             const container = document.createElement("div");
             container.className = "teamJoin-container";
             container.onclick = function() {
                 // 각 팀에 대한 고유한 페이지로 이동(뒤에 함수로 따로 showAlert 정의)
-                showAlert(`${title} 채널에 참가하시겠습니까?`, channelId);
+                showAlert(`${title} 채널에 참가하시겠습니까?`, room);
             };
 
             // 위치 설정
@@ -267,7 +267,7 @@
         document.body.appendChild(teamContainer9);
         document.body.appendChild(teamContainer10);
 
-        function showAlert(message, channelId) {
+        function showAlert(message, room) {
             // 모달 메시지 변경
             document.getElementById("modal-message").textContent = message;
             // 모달 보이기
@@ -278,16 +278,16 @@
 
             yesButton.onclick = function() {
                 closeModal();
-                redirectToIndex('Yes',channelId);
+                redirectToIndex('Yes',room);
             };
 
         }
         function closeModal() {
             document.getElementById("myModal").style.display = "none";
         }
-        function redirectToIndex(button, channelId) {
+        function redirectToIndex(button, room) {
             if (button === 'Yes') {
-                window.location.href = "/chats?channelId=" + channelId;
+                window.location.href = "/chats?room=" + room;
                 // parent.location.href = '/chats';
                 // window.location.href = `chats.html?channelId=${channelId}`;
             } else {
