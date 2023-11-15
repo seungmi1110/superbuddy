@@ -8,7 +8,6 @@ import { Server as SocketIOServer } from 'socket.io';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { Board } from './models/board.js';
 
 
 
@@ -231,6 +230,7 @@ import { User } from './models/User.js';
 // import { User } from './models/User.js';
 // import User from './models/User.js';
 // const user = new User({ name: 'John', email: 'john@example.com', username: 'john_doe' });
+import { Board } from './models/board.js';
 import staticServer from 'serve-static';
 app.set("view engine", "ejs");
 
@@ -304,23 +304,23 @@ app.get("/chats", isLoggedIn, function (req, res) {
 app.get("/board", isLoggedIn, async(req, res)=>{
   // 현재 로그인한 사용자 정보를 가져옵니다.
   let boards = await Board.find().sort({createdAt: 'desc'}).exec();
-  res.render( '/src/board.html',{boards: boards}); // 사용자 정보를 뷰로 전달합니다.
+  res.sendFile( __dirname+'/src/board.html',{boards: boards}); // 사용자 정보를 뷰로 전달합니다.
 });
 
 app.get('/boardWrite', isLoggedIn, (req, res) => {
   if(!isLoggedIn) res.rendirect('login/login');
-  else res.render('./board/boardWrite');
+  else res.sendFile(__dirname+'./board/boardWrite');
 });
 app.get("/boardRead", async(req,res)=>{
   let id =req.query.id;
   let board = await Board.find({id:id}).exec();
   let updwatch = await Board.updateOne({ id: id }, { $inc: { watch: 1 } });
-  res.render('/src/boardRead.html',{board:board[0]},updwatch);
+  res.sendFile(__dirname+'/src/boardRead.html',{board:board[0]},updwatch);
   });
 app.get('/boardUpdate', isLoggedIn, async(req, res) => {
   let id = req.query.id;
   let updwatch = await Board.updateOne({ id: id }, { $inc: { watch: 1 } });
-    res.render('/src/boardUpdate.html', { board: board[0] });
+    res.sendFile(__dirname+'/src/boardUpdate.html', { board: board[0] });
   });
   //add2ed code
 app.get("/",  function (req, res) {

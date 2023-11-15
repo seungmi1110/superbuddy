@@ -3,9 +3,10 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('../app.js');
-const User = require('../models/User');
-const Board = require('../models/board');
 
+import { Board } from './models/board.js';
+
+router.set('view engine', 'ejs');
 router.post('/create', isLoggedIn, async(req, res, next) => {
     const { subject, content, nick } = req.body;
     try {

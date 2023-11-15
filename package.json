@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
+    "html": "^1.0.0",
     "moment": "^2.29.1",
     "mongoose": "^6.0.13",
     "passport": "^0.6.0",
