@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('../app.js');
-const User = require('../models/user');
+const User = require('../models/User');
 const Board = require('../models/board');
 
 router.post('/create', isLoggedIn, async(req, res, next) => {

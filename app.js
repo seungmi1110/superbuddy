@@ -8,6 +8,9 @@ import { Server as SocketIOServer } from 'socket.io';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import { Board } from './models/board.js';
+
+
 
 
 const app = express();
@@ -300,31 +303,26 @@ app.get("/chats", isLoggedIn, function (req, res) {
 });
 app.get("/board", isLoggedIn, async(req, res)=>{
   // 현재 로그인한 사용자 정보를 가져옵니다.
-  let boards = await Board.findAll({
-    attributes:['id','subject','author',[sequelize.fn('DATE_FORMAT', sequelize.col('createdAt'), '%Y-%m-%d %H:%i:%s'), 'createdAt'],'watch'],
-    order: [['createdAt', 'DESC']]
-  });
+  let boards = await Board.find().sort({createdAt: 'desc'}).exec();
   res.render( '/src/board.html',{boards: boards}); // 사용자 정보를 뷰로 전달합니다.
 });
-app.get("/boardRead",async(req,res)=>{
-  let id =req.query.id;
-  let board = await Board.findAll({
-    where:{id:id},
-    attributes:['id','subject','author','content'[sequelize.fn('DATE_FORMAT', sequelize.col('createdAt'), '%Y-%m-%d %H:%i:%s'), 'createdAt'],'watch'],
-  });
-  let updwatch =await Board.increment({watch: 1},{where:{id:id}})
-    .then((result)=>{
-      console.log('조회수 증가 성공');
-    }).catch((err)=>{
-      console.error(err);
-    });
-    res.render('/src/boardRead.html',{board:board[0]},updwatch);
-  });
-app.get("/boardWrite",isLoggedIn, (req, res)=>{
-  if(!isLoggedIn) res.redirect('/login');
-  else res.render('/src/boardWrite.html');
+
+app.get('/boardWrite', isLoggedIn, (req, res) => {
+  if(!isLoggedIn) res.rendirect('login/login');
+  else res.render('./board/boardWrite');
 });
-//add2ed code
+app.get("/boardRead", async(req,res)=>{
+  let id =req.query.id;
+  let board = await Board.find({id:id}).exec();
+  let updwatch = await Board.updateOne({ id: id }, { $inc: { watch: 1 } });
+  res.render('/src/boardRead.html',{board:board[0]},updwatch);
+  });
+app.get('/boardUpdate', isLoggedIn, async(req, res) => {
+  let id = req.query.id;
+  let updwatch = await Board.updateOne({ id: id }, { $inc: { watch: 1 } });
+    res.render('/src/boardUpdate.html', { board: board[0] });
+  });
+  //add2ed code
 app.get("/",  function (req, res) {
   // 현재 로그인한 사용자 정보를 가져옵니다.
   res.sendFile(__dirname+ '/html/intro.html'); // 사용자 정보를 뷰로 전달합니다.
