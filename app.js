@@ -298,9 +298,31 @@ app.get("/chats", isLoggedIn, function (req, res) {
   res.sendFile(__dirname+ '/src/chats.html'); // 사용자 정보를 뷰로 전달합니다.
   // dirname+ '/src/chats.html'+ 'channelId=' + channelId
 });
-app.get("/board", isLoggedIn, function (req, res) {
+app.get("/board", isLoggedIn, async(req, res)=>{
   // 현재 로그인한 사용자 정보를 가져옵니다.
-  res.sendFile(__dirname+ '/src/board.html'); // 사용자 정보를 뷰로 전달합니다.
+  let boards = await Board.findAll({
+    attributes:['id','subject','author',[sequelize.fn('DATE_FORMAT', sequelize.col('createdAt'), '%Y-%m-%d %H:%i:%s'), 'createdAt'],'watch'],
+    order: [['createdAt', 'DESC']]
+  });
+  res.render( '/src/board.html',{boards: boards}); // 사용자 정보를 뷰로 전달합니다.
+});
+app.get("/boardRead",async(req,res)=>{
+  let id =req.query.id;
+  let board = await Board.findAll({
+    where:{id:id},
+    attributes:['id','subject','author','content'[sequelize.fn('DATE_FORMAT', sequelize.col('createdAt'), '%Y-%m-%d %H:%i:%s'), 'createdAt'],'watch'],
+  });
+  let updwatch =await Board.increment({watch: 1},{where:{id:id}})
+    .then((result)=>{
+      console.log('조회수 증가 성공');
+    }).catch((err)=>{
+      console.error(err);
+    });
+    res.render('/src/boardRead.html',{board:board[0]},updwatch);
+  });
+app.get("/boardWrite",isLoggedIn, (req, res)=>{
+  if(!isLoggedIn) res.redirect('/login');
+  else res.render('/src/boardWrite.html');
 });
 //add2ed code
 app.get("/",  function (req, res) {

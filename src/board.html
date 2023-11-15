@@ -1,141 +1,41 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
-
-    <link rel="stylesheet" href="./boardstyle.css" />
-    <link rel="stylesheet" href="./boardstyle2.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
-    />
-  </head>
-  <body>
-    <div class="board">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/board/boardList.css" />
+    <title>자유게시판</title>
+</head>
+<body>
+    <section>
       <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
-        <div class="div">
-          <div class="leftcontent">
-            <div class="div1">
-              <div class="div2">게시판</div>
-              <div class="div3">
-                <span>자유게시판</span>
-                <span class="span"> </span>
-              </div>
-              <div class="div4">
-                <span>질문게시판</span>
-                <span class="span1"> </span>
-              </div>
-              <div class="div5">멘토 & 멘티</div>
-              <img class="child" alt="" src="https://ifh.cc/g/0ckn8Z.png" />
-
-              <img class="item" alt="" src="https://ifh.cc/g/0ckn8Z.png" />
-
-              <img class="inner" alt="" src="https://ifh.cc/g/0ckn8Z.png" />
-
-              <img class="line-icon" alt="" src="https://ifh.cc/g/0ckn8Z.png" />
-            </div>
-            <div class="frame">
-              <div class="div6">
-                <div class="div7">게시판 질문게시판</div>
-                <img class="vector-icon" alt="" src="https://ifh.cc/g/LccqG9.png" />
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <div class="frame1">
-              <div class="frame2">
-                <div class="searchbar">
-                  <div class="searchbar-child"></div>
-                  <img class="search-icon" alt="" src="https://ifh.cc/g/lWACy2.png" />
-                </div>
-                <div class="tag">
-                  <div class="tagunhover">
-                    <div class="tagunhover-child"></div>
-                    <div class="div8">#리그오브레전드</div>
-                  </div>
-                  <div class="taghover">
-                    <div class="taghover-child"></div>
-                    <img class="vector-icon1" alt="" src="https://ifh.cc/g/CBqpRP.png" />
-
-                    <div class="div8">#오버워치</div>
-                  </div>
-                </div>
-              </div>
-              <div class="frame3">
-                <div class="frame4"></div>
-                <div class="post">
-                  <img class="frame-iconpic" alt="" src="https://ifh.cc/g/mRN6rx.png" />
-                  <img class="frame-icon" alt="" src="https://ifh.cc/g/byx1YH.png" />
-                    
-                  <div class="frame5">
-                    <div class="frame6">
-                      <div class="reaction">
-                        <div class="view">
-                          <div class="views">21 views</div>
-                          <img
-                            class="color-icon"
-                            alt=""
-                            src="https://ifh.cc/g/PpQ2mV.png"
-                          />
-                        </div>
-                        <div class="comment">
-                          <img
-                            class="vector-icon2"
-                            alt=""
-                            src="https://ifh.cc/g/Yl69LK.png"
-                          />
-
-                          <div class="div10">10</div>
-                        </div>
-                        <div class="heart">
-                          <img
-                            class="color-icon1"
-                            alt=""
-                            src="https://ifh.cc/g/HCJmv8.png"
-                          />
-
-                          <div class="div11">3</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="frame7">
-                      <div class="frame8">
-                        <div class="content1">
-                          <div class="div12">
-                            <div class="div13">자유게시판 게시글 1</div>
-                          </div>
-                          <div class="div14">
-                            <div class="div15">슈퍼슈퍼12</div>
-                            <div class="div16">2023년 7월 17일 14:28</div>
-                            <img class="user-icon" alt="" src="https://ifh.cc/g/kPLcKh.png" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="frame9">
-                        <div class="tag2">
-                          <div class="tag2-child"></div>
-                          <div class="div17">오버워치</div>
-                        </div>
-                      </div>
-                      <div class="frame10">
-                        <div class="tag2">
-                          <div class="tag2-child"></div>
-                          <div class="div18">태그 2</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="fab">
-              <div class="elevation"></div>
-              <div class="states"></div>
-              <img class="icon" alt="" src="https://ifh.cc/g/R41OG9.png" />
-            </div>
-          </div>
+        <div class="board_list">
+            <table>
+                <thead>
+                    <tr class="table_menu">
+                        <th class="list_category">카테고리</th>
+                        <th class="list_subject">제목</th>
+                        <th class="list_writer">작성자</th>
+                        <th class="list_date">작성일</th>
+                        <th class="list_watch">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for board in boards %}
+                    <tr class="table_list">
+                        <td class="list_category"></td>
+                        <td class="list_subject" id="list_subject"><a href="/boardRead?id={{board.id}}">{{board.subject}}</a></td>
+                        <td class="list_writer" id="list_writer">{{board.author}}</td>
+                        <td class="list_date">{{board.createdAt}}</td>
+                        <td class="list_watch">{{board.watch}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/boardWrite"><button>글 쓰기</button></a>
         </div>
-    </div>
-  </body>
+    </section>
+</body>
 </html>
