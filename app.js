@@ -9,6 +9,10 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
+// 변경 후
+import boardRouter from './src/js/board.js';
+
+
 
 
 
@@ -304,13 +308,14 @@ app.get("/chats", isLoggedIn, function (req, res) {
 app.get("/board", isLoggedIn, async(req, res)=>{
   // 현재 로그인한 사용자 정보를 가져옵니다.
   let boards = await Board.find().sort({createdAt: 'desc'}).exec();
-  res.sendFile( __dirname+'/src/board.html',{boards: boards}); // 사용자 정보를 뷰로 전달합니다.
+  res.render( 'board',{boards: boards}); // 사용자 정보를 뷰로 전달합니다.
 });
 
 app.get('/boardWrite', isLoggedIn, (req, res) => {
-  if(!isLoggedIn) res.rendirect('login/login');
-  else res.sendFile(__dirname+'./board/boardWrite');
+  if(!isLoggedIn) res.redirect('login/login');
+  else res.render('boardWrite', { user: req.user });
 });
+
 app.get("/boardRead", async(req,res)=>{
   let id =req.query.id;
   let board = await Board.find({id:id}).exec();
@@ -338,9 +343,20 @@ app.get("/teamcreate", isLoggedIn,function (req, res) {
 app.use('/src', express.static('src'));
 // app.use('/src', express.staticServer('src'));
 // Showing secret page
-app.get("/mypage", isLoggedIn, function (req, res) {
-  res.render('mypage', { user: req.user });
+app.use('/board', boardRouter);
+
+app.get("/mypage", isLoggedIn, function (req, res, next) {
+  // 현재 로그인한 사용자의 username을 사용합니다.
+  User
+    .findOne({ username: req.user.username })
+    .populate('boards')
+    .exec(function(err, user) {
+      if (err) return next(err);
+      // 'mypage'는 사용자 프로필을 렌더링하는 뷰 템플릿입니다.
+      res.render('mypage', { user });
+    });
 });
+
 
 // Showing register form
 app.get("/register", function (req, res) {
@@ -417,7 +433,8 @@ app.get("/logout", function (req, res) {
 //   else{ console.log('err');}
 //   res.redirect("/login");
 // }
-function isLoggedIn(req, res, next) {
+
+export function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
@@ -425,6 +442,7 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login");
   }
 }
+
 
 app.listen(8084, function () {
   console.log("Server Has Started!");

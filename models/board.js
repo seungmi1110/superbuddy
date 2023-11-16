@@ -14,11 +14,12 @@ const boardSchema = new mongoose.Schema({
         comment: "게시판 제목",
     },
     author: {
-        type: String,
-        maxLength: 100,
+        type: mongoose.Schema.Types.ObjectId, // 'User' 스키마를 참조합니다.
+        ref: 'User',
         required: true,
         comment: "작성자",
     },
+
     content: {
         type: String,
         maxLength: 1000,

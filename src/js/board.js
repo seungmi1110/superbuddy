@@ -1,23 +1,23 @@
-const express = require('express');
+import express from 'express';
+
+import { isLoggedIn } from '../../app.js';
+
+import { Board } from '../../models/board.js';
+
 const router = express.Router();
-const passport = require('passport');
-const bcrypt = require('bcrypt');
-const { isLoggedIn, isNotLoggedIn } = require('../app.js');
 
-import { Board } from './models/board.js';
 
-router.set('view engine', 'ejs');
 router.post('/create', isLoggedIn, async(req, res, next) => {
-    const { subject, content, nick } = req.body;
+    const { subject, content, username } = req.body;
     try {
-        const exSubject = await Board.findOne({ where: { subject }});
+        const exSubject = await Board.findOne({ subject });
         if(exSubject) {
-            return res.redirect('/create?error=exist');
+            return res.status(400).json({ error: 'Subject already exists' });
         }
         await Board.create({
             subject,
             content,
-            author: nick,
+            author: req.body.username,
         });
         return res.redirect('/board');
     } catch(err) {
@@ -56,4 +56,4 @@ router.post('/delete', isLoggedIn, async(req, res, next) => {
     }
 });
 
-module.exports = router;
+export default router;
