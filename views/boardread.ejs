@@ -1,29 +1,39 @@
-<body>
-    <section>
-        <div class="board_read">
-            <div class="read_top">
-                <span id="read_subject"><%= board ? board.subject : 'N/A' %></span>
-                <span id="read_created">작성일 <%= board ? board.createdAt : 'N/A' %></span>
-            </div>
-            <div class="read_sub">
-                <span id="read_author"><%= board ? board.author : 'N/A' %></span>
-                <span>조회수 <%= board ? board.watch : 'N/A' %></span>
-            </div>
-            <div class="read_main">
-                <%= board ? board.content : 'N/A' %>
-            </div>
-            <div class="read_buttons">
-                <a href="/board" class="read_boardList"><button>목록</button></a>
-                <div>
-                    <% if (user && board && user.username == board.author) { %>
-                        <a href="/boardUpdate?id=<%= board.id %>"><button>게시글 수정</button></a>
-                        <form action="/board/delete" method="post">
-                            <input type="text" name="bid" value="<%= board.id %>" hidden/>
-                            <button class="board_delete" type="submit">게시글 삭제</button>
-                        </form>
-                    <% } %>
+<head>
+    <style>
+        iframe {
+            position: fixed;
+            justify-content: space-between;
+            display: flex;
+            z-index: 100;
+          }
+    </style>
+</head>
+    <body>
+        <section>
+            <div class="board_read">
+                <div class="read_top">
+                    <span id="read_subject"><%= board ? board.subject : 'N/A' %></span>
+                    <span id="read_created">작성일 <%= board ? board.createdAt : 'N/A' %></span>
+                </div>
+                <div class="read_sub">
+                    <span id="read_author"><%= board ? board.author : 'N/A' %></span>
+                    <span>조회수 <%= board ? board.watch : 'N/A' %></span>
+                </div>
+                <div class="read_main">
+                    <%= board ? board.content : 'N/A' %>
+                </div>
+                <div class="read_buttons">
+                    <a href="/board" class="read_boardList"><button>목록</button></a>
+                    <div>
+                        <% if (user && board && user.username == board.author) { %>
+                            <a href="/boardUpdate?id=<%= board.id %>"><button>게시글 수정</button></a>
+                            <form action="/board/delete" method="post">
+                                <input type="text" name="bid" value="<%= board.id %>" hidden/>
+                                <button class="board_delete" type="submit">게시글 삭제</button>
+                            </form>
+                        <% } %>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</body>
+        </section>
+    </body>

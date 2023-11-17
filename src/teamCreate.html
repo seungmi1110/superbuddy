@@ -13,7 +13,7 @@
             height: 100%;
             overflow-y: auto;
             overflow-x: hidden;
-            display: block;
+            margin:0px;
             background-color: #363535;
             position: absolute;
             border-radius: 0px 0px 0px 0px;
@@ -148,11 +148,18 @@
             display: flex;
             justify-content: space-between;
         }
+        iframe {
+            position: fixed;
+            justify-content: space-between;
+            display: flex;
+            z-index: 100;
+            margin:none;
+          }
     </style>
 </head>
 
 <body>
-    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" ></iframe>  
     <div>
         <div class="search-box">
             <input type="text" id="tagSearch" placeholder="검색할 #tag를 입력하세요" onkeydown="if(event.key === 'Enter') searchTags()">

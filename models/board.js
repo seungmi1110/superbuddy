@@ -14,8 +14,7 @@ const boardSchema = new mongoose.Schema({
         comment: "게시판 제목",
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId, // 'User' 스키마를 참조합니다.
-        ref: 'User',
+        type: String, // 'User' 스키마를 참조합니다.
         required: true,
         comment: "작성자",
     },

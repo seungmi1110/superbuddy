@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상단바 작업 중..</title>
+    <title>상단바</title>
     <link rel="icon" href="https://ifh.cc/g/6gwYnQ.png">
     <style>
         /* 전체 페이지 스타일 */
         body {
+            
             margin: 0;
             padding: 0;
             width: 100%; /* 브라우저 창의 가로 넓이 */
@@ -45,6 +46,9 @@
 
         .hamburger-a-buttons {
             display: none;
+            height:80px;
+            
+
         }
 
         /* 메뉴 스타일 */
@@ -76,42 +80,16 @@
         /* 로그아웃과 구독하기 버튼 스타일 */
         .action-buttons {
             display: flex;
-            align-items: center;
-            gap: 30px; /* 간격을 30px로 설정 */
+            align-items: left;
+            
+            gap: 0px; /* 간격을 30px로 설정 */
         }
 
-        .action-buttons button.coin {
-            font-size: 16px; /* 코인 버튼의 글씨 크기 설정 */
-            margin-right: 20px; /* 코인 버튼 우측 여백 설정 */
-        }
-
-        .action-buttons button.button {
-            padding: 0; /* 버튼의 내부 패딩 제거 */
-            border: none; /* 버튼의 테두리 제거 */
-            background-color: transparent; /* 배경색 투명으로 설정 */
-            cursor: pointer;
-        }
         
-        .button.bell img,
+        
         .button.my-page img {
             width: 20px;
             height: auto;
-        }
-
-        /* 코인 및 알림 스타일 */
-        .coin,
-        .button bell {
-            margin-left: 20px; /* 로그아웃과 다른 요소 간격 조절 */
-            margin-right: 20px; /* 코인 및 알림 간격 조절 */
-        }
-
-        .coin {
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .coin span {
-            font-size: 16px; /* 원하는 크기로 설정하세요. */
         }
 
         /* select 스타일 수정 */
@@ -157,33 +135,34 @@
             font-size: 12px; /* 드롭다운 메뉴의 항목 글씨 크기를 12px로 설정 */
             text-align: center;
         }
-        
-        /* 드롭다운 메뉴 항목에 마우스를 가져다 대면 해당 항목만 노란색으로 변화 */
+    
+        /* 드롭다운 메뉴 항목에 마우스를 가져다 대면 해당 항목만 노란색으로 변화 
         .menu-item .submenu li:hover a {
             color: #FFCD29;
         }
-        /* "소개", "팀개설", "게시판" 항목에 마우스를 가져다 댔을 때 텍스트 색상을 노란색으로 변경 */
+        /* "소개", "팀개설", "게시판" 항목에 마우스를 가져다 댔을 때 텍스트 색상을 노란색으로 변경 
         .menu-item:hover > a {
             color: #FFCD29;
-        }
-        /* 드롭다운 메뉴 숨김 상태에서 텍스트 색상을 하얀색으로 유지 */
+        }*/
+        /* 드롭다운 메뉴 숨김 상태에서 텍스트 색상을 하얀색으로 유지 
         .menu-item .submenu {
             display: none;
-            top: 100%; /* 드롭다운 박스를 메뉴 항목 아래에 표시 */
-        }
-        /* 드롭다운 메뉴가 보일 때 드롭다운 항목 텍스트 색상을 하얀색으로 설정 */
+            top: 100%; /* 드롭다운 박스를 메뉴 항목 아래에 표시 
+        }*/
+        /* 드롭다운 메뉴가 보일 때 드롭다운 항목 텍스트 색상을 하얀색으로 설정 
         .menu-item:hover .submenu {
             display: block;
-        }
-        /* 드롭다운 메뉴에 마우스를 올려놓을 때 메뉴가 열려있도록 유지 */
+        }*/
+        /* 드롭다운 메뉴에 마우스를 올려놓을 때 메뉴가 열려있도록 유지 
         .menu-item .submenu:hover {
             display: block;
-        }
-        /* 드롭다운 항목과 드롭다운 메뉴 사이에 마우스를 움직일 때 메뉴가 열려있도록 유지 */
+        }*/
+        /* 드롭다운 항목과 드롭다운 메뉴 사이에 마우스를 움직일 때 메뉴가 열려있도록 유지 
         .menu-item:hover .submenu:hover {
             display: block;
-        }
+        }*/
 
+    
 
         /* 햄버거 아이콘 스타일 */
         .hamburger-menu {
@@ -217,6 +196,7 @@
             }
             .hamburger-a-buttons {
                 white-space: pre-line;
+                
             }
             .menu li,
             .hamburger-a-buttons button {
@@ -251,7 +231,7 @@
     <!-- 상단바 -->
     <div class="navbar">
         <div class="logo-menu-container">
-            <a class="logo" href="#">
+            <a class="logo" onclick="teamcreate()">
                 <img src="https://ifh.cc/g/1CqmLD.png" alt="로고" style="width: 26px; height: auto;">
                 SUPER BUDDY
             </a>
@@ -265,37 +245,19 @@
             <ul class="menu">
                 <li class="menu-item">
                     <a onclick="userintro()">소개</a>
-                    <ul class="submenu">
-                        <li><a href="#">항목 1</a></li>
-                        <li><a href="#">항목 2</a></li>
-                        <li><a href="#">항목 3</a></li>
-                    </ul>
                 </li>
                 <li class="menu-item">
                     <a onclick="teamcreate()">팀개설</a>
-                    <ul class="submenu">
-                        <li><a href="#">항목 1</a></li>
-                        <li><a href="#">항목 2</a></li>
-                        <li><a href="#">항목 3</a></li>
-                    </ul>
                 </li>
                 <li class="menu-item">
                     <a onclick="board()">게시판</a>
                     <ul class="submenu">
-                        <li><a href="#">항목 1</a></li>
-                        <li><a href="#">항목 2</a></li>
-                        <li><a href="#">항목 3</a></li>
                     </ul>
                 </li>
                 <li>
                     <button style="font-size: 16px;" onclick="subscribe()">구독하기</button>
                 </li>
                 <div class="hamburger-a-buttons">
-                    <button class="coin2" style="margin-left: 2px; margin-right: 10px;">
-                        0
-                        <img src="https://ifh.cc/g/x9T2z8.png" alt="코인" style="width: 20px; height: auto; margin-left: 5px;">
-                    </button>
-                    <button class="button bell2" style="font-size: 16px;"onclick="bell()>알림</button>
                     <button class="button my-page2" style="font-size: 16px;" onclick="mypage()">마이페이지</button>    
                     <button class="logout2" style="font-size: 16px;" onclick="logout()" >로그아웃</button>         
                 </div>
@@ -303,16 +265,6 @@
         </div>
         <div class="action-buttons">
             <button class="logout" style="font-size: 16px;" onclick="logout()">로그아웃</button>
-
-            <button class="coin" style="margin-left: 2px; margin-right: 10px; font-size: 16px;"onclick="bell()">
-                0
-                <img src="https://ifh.cc/g/x9T2z8.png" alt="코인" style="width: 20px; height: auto; margin-left: 5px;">
-            </button>
-            <button class="button bell">
-                <a onclick="bell()">
-                    <img src="https://ifh.cc/g/jMOTza.png" alt="알림" style="width: 17px; height: auto;">
-                </a>
-            </button>
             <button class="button my-page" style="margin-right: 40px;" onclick="mypage()">
                 <a href="">
                     <img src="https://ifh.cc/g/rng0oV.png" alt="마이페이지" style="width: 20px; height: auto;">
@@ -359,7 +311,7 @@
         }
 
         // 드롭다운 메뉴 토글 기능 추가
-        menuItems.forEach((menuItem) => {
+       /* menuItems.forEach((menuItem) => {
             const submenu = menuItem.querySelector('.submenu');
             menuItem.addEventListener('mouseenter', () => {
                 if (!isMenuOpen || window.innerWidth > 1050) { // 메뉴가 열려있을 때만 드롭다운 열기
@@ -373,7 +325,7 @@
             });
             submenu.style.display = 'none';
         });
-
+        */
         // 햄버거 아이콘 클릭 이벤트 리스너 설정
         hamburgerMenu.addEventListener('click', () => {
             isMenuOpen = !isMenuOpen; // 메뉴 상태 변경

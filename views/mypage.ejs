@@ -11,7 +11,7 @@
 
     <style>
       body {
-        margin: 0;
+        margin: 0px;
         line-height: normal;
       }
 
@@ -21,11 +21,11 @@
 
         /* font sizes */
         --font-size-2xs: 11px;
-
+        
         /* Colors */
         --color-gray-100: #949494;
         --color-white: #fff;
-        --color-darkgray: #979797;
+        --https://ifh.cc/g/3DxObF.jpgcolor-darkgray: #979797;
 
         /* Gaps */
         --gap-31xl: 50px;
@@ -47,10 +47,11 @@
       }
 
       .child {
+
         position: relative;
-        border-top: 1px solid var(--color-white);
+        border-top: 0px solid var(--color-white);
         box-sizing: border-box;
-        height: 1px;
+        height: 0px;
       }
 
       .div1 {
@@ -123,7 +124,7 @@
 
       .detail {
         position: absolute;
-        margin: 0 !important;
+        margin: 0px !important;
         top: 40.5px;
         left: 10px;
         width: 157px;
@@ -168,10 +169,10 @@
       }
 
       .item {
-        border-top: 1px solid var(--color-gray-100);
+        border-top: 0px solid var(--color-gray-100);
         box-sizing: border-box;
         width: 53px;
-        height: 1px;
+        height: 0px;
       }
 
       .a {
@@ -182,10 +183,10 @@
         padding: 0 2px;
         align-items: flex-start;
         justify-content: center;
-        gap: 1px;
+        
         cursor: pointer;
         margin-left: -80px;
-        margin-bottom: -1px;
+        
         font-size: var(--font-size-2xs);
         color: var(--color-gray-100);
       }
@@ -245,12 +246,13 @@
 
       .div {
         align-self: stretch;
-        padding: 0 12px;
+        padding: 0px 12px;
         align-items: center;
         gap: 40px;
       }
 
       .content {
+        z-index: 0;
         border-radius: 10px;
         background-color: #1b1b1b;
         width: 1222px;
@@ -267,20 +269,21 @@
       }
 
       .page {
+        padding: 90px;
         align-self: stretch;
-        overflow-y: auto;
-        flex-direction: row;
+
+        flex-direction: row;  
         justify-content: center;
       }
 
       .mypage {
         position: relative;
-        top: -100px;
+        top: 0px;
         background-color: #363535;
         width: 100%;
         overflow: hidden;
         flex-direction: column;
-        padding: 102px 0;
+        
         box-sizing: border-box;
         justify-content: flex-start;
         text-align: left;
@@ -320,13 +323,19 @@
           justify-content: center;
         }
       }
+      iframe {
+        position: fixed;
+        justify-content: space-between;
+        display: flex;
+        z-index: 100;
+      }
     </style>
   </head>
   
   <body>
     
     <div class="mypage">
-      <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+    <iframe src="/src/spbd_navbar2.html" frameborder="0" scrolling="no" width="100%"></iframe>
       <div class="page">
         
         <div class="content">
