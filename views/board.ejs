@@ -26,7 +26,7 @@
                     <% for(let i=0; i < boards.length; i++) { let board = boards[i]; %>
                     <tr class="table_list">
                         <td class="list_category"></td>
-                        <td class="list_subject" id="list_subject"><a href="/boardRead?id=<%=board.id%>"><%=board.subject%></a></td>
+                        <td class="list_subject" id="list_subject"><a href="/boardRead?id=<%=board._id%>"><%=board.subject%></a></td>
                         <td class="list_writer" id="list_writer"><%=board.author%></td>
                         <td class="list_date"><%=board.createdAt%></td>
                         <td class="list_watch"><%=board.watch%></td>

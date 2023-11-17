@@ -312,20 +312,22 @@ app.get("/board", isLoggedIn, async(req, res)=>{
 });
 
 app.get('/boardWrite', isLoggedIn, (req, res) => {
-  if(!isLoggedIn) res.redirect('login/login');
+  if(!isLoggedIn) res.redirect('/login');
   else res.render('boardWrite', { user: req.user });
 });
 
-app.get("/boardRead", async(req,res)=>{
-  let id =req.query.id;
-  let board = await Board.find({id:id}).exec();
-  let updwatch = await Board.updateOne({ id: id }, { $inc: { watch: 1 } });
-  res.sendFile(__dirname+'/src/boardRead.html',{board:board[0]},updwatch);
-  });
+app.get("/boardRead", isLoggedIn, async (req, res) => {
+  let id = req.query.id;
+  let board = await Board.findOne({ _id: id }).populate('author').exec();
+  let updwatch = await Board.updateOne({ _id: id }, { $inc: { watch: 1 } });
+  res.render('boardRead', { board: board, user: req.user });
+});
+
+
 app.get('/boardUpdate', isLoggedIn, async(req, res) => {
   let id = req.query.id;
   let updwatch = await Board.updateOne({ id: id }, { $inc: { watch: 1 } });
-    res.sendFile(__dirname+'/src/boardUpdate.html', { board: board[0] });
+    res.render('boardUpdate', { board: Board[0] });
   });
   //add2ed code
 app.get("/",  function (req, res) {
